@@ -1,0 +1,47 @@
+\chapter{Introdução}
+
+\section{Tema}
+
+O Programa de Aquisição de Alimentos (PAA) é uma iniciativa do governo que tem como objetivo incentivar a agricultura familiar por meio de chamadas públicas e promover o acesso a uma alimentação saudável às famílias, sobretudo às que se encontram em situação de vulnerabilidade.
+
+O gerenciamento de uma chamada pública do PAA requer organização e planejamento, visto que, ao longo do edital, são feitas entregas semanais de alimentos que devem ser registradas corretamente. Dito isso, este trabalho tem como objetivo descrever o sistema desenvolvido para gerenciar as entregas realizadas pelos agricultores a cada organização e equipamento de segurança alimentar que atendem à população em situação de insegurança alimentar e vulnerabilidade social.
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.5\linewidth]{Imagens/chap01/loren-ipsum-cover.jpg}
+%     \caption{Maecenas viverra convallis sem, id imperdiet neque rhoncus et. Ut vel mi erat. Nam quam arcu, mollis sodales felis at, sagittis iaculis lectus.}
+%     \label{fig:lorem_ipsum}
+% \end{figure}
+
+\section{Delimitação}
+
+O PAA possui seis modalidades no total. O projeto atuará na modalidade Doação Simultânea, que hoje é aplicada no assentamento dos agricultores do Projeto de Desenvolvimento Sustentável (PDS) Osvaldo de Oliveira, localizado no município de Macaé, na região Norte Fluminense.
+
+\section{Justificativa}
+
+Atualmente, a gestão da chamada pública em exercício no assentamento encontra-se centralizada em uma única pessoa, de modo que tarefas relacionadas às entregas semanais realizadas pelas famílias, à geração de comprovantes necessários para os atores do programa e ao monitoramento da chamada sobrecarregam seu trabalho e demandam tempo para serem realizadas.
+
+\section{Objetivos}
+
+Nesse contexto, o sistema tem como objetivo fornecer ao gestor um panorama geral do andamento do edital, padronizando a inserção de dados e sinalizando erros e inconsistências de forma visual, por meio de uma interface intuitiva. Além disso, automatiza a geração de comprovantes para os produtores, bem como da documentação necessária à validação das entregas.
+
+\section{Metodologia}
+
+O levantamento dos requisitos funcionais e não funcionais do sistema foi realizado por meio de reuniões com os coordenadores do PAA e a partir dos feedbacks fornecidos por eles ao longo do processo. Após o mapeamento das funcionalidades necessárias, tornou-se essencial definir as tecnologias a serem utilizadas no desenvolvimento, bem como o tipo de arquitetura a ser adotada.
+
+Optou-se por uma arquitetura modular, garantindo a independência entre backend e frontend. No backend, foi escolhido o Java, uma linguagem consolidada no mercado, reconhecida por sua robustez, estabilidade e ampla comunidade, o que contribui para a manutenção e evolução do sistema. Para o frontend, adotou-se a biblioteca React, com o objetivo de proporcionar melhor performance e uma navegação mais fluida aos usuários. Como sistema gerenciador de banco de dados, utilizou-se o PostgreSQL, por se tratar de uma solução open source, estável, robusta e amplamente empregada em aplicações empresariais.
+
+Todo o projeto foi versionado com o uso do Git e armazenado no GitLab. Cada módulo possui sua própria imagem Docker, armazenada no DockerHub. Para a integração contínua, geração das imagens e realização do deploy no ambiente de homologação, foi utilizado o GitLab CI/CD. Ressalta-se que todo o projeto é open source e pode ser clonado nos respectivos repositórios.
+
+
+\section{Descrição}
+
+No capítulo 2, são introduzidos os fundamentos da tecnologia social aplicada à agricultura familiar, definindo o que é a agricultura familiar, o quanto ela impacta o Brasil e quais políticas públicas estão atreladas a essas famílias com ênfase no PAA. Também serão abordados e definidos conceitos como tecnologia social, design participativo e software livre.
+
+No capítulo 3, será apresentado o conceito de engenharia de software, desde os primórdios até o desenvolvimento ágil, hoje amplamente utilizado nas empresas.
+
+No capítulo 4, será abordada a arquitetura do sistema, introduzindo definições arquiteturais e as responsabilidades dos módulos, bem como aspectos de versionamento, CI/CD e imagens Docker.
+
+No capítulo 5, todos os conceitos serão relacionados ao desenvolvimento do projeto, com ênfase nos detalhes da implementação.
+
+Por fim, nos capítulos 6 e 7, serão apresentados os resultados, as conclusões e os trabalhos futuros, a fim de aprimorar a ferramenta e tornar o processo mais fluido para os gestores.

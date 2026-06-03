@@ -1,0 +1,42 @@
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+
+# Index/glossary/list auxiliary files
+*.idx
+*.ilg
+*.ind
+*.ist
+*.glg
+*.glo
+*.gls
+*.acn
+*.acr
+*.alg
+
+# Template-specific generated lists
+*.abx
+*.syx
+*.los
+*.lab
+
+# BibLaTeX/Biber and other LaTeX helpers
+*.bcf
+*.run.xml
+*.nav
+*.snm
+*.vrb
+*.xdv
+
+# Temporary files sometimes left by interrupted runs
+pdflatex*.fls
+*.tmp
