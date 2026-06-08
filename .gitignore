@@ -10,7 +10,7 @@
 *.synctex.gz
 *.bbl
 *.blg
-.pdf
+*.pdf
 
 # Index/glossary/list auxiliary files
 *.idx
