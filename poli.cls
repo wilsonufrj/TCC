@@ -240,6 +240,20 @@ top=2.5cm,bottom=2.5cm,left=3.0cm,right=3.0cm]{geometry}
 	\else
 	\clearpage
 	\fi}
+\newcommand\approval@signature[2]{%
+	\noindent
+	\begin{minipage}[t]{0.20\textwidth}
+		\raggedright #1:
+	\end{minipage}%
+	\hfill
+	\begin{minipage}[t]{0.74\textwidth}
+		\centering
+		\vspace*{6mm}
+		\rule{\linewidth}{0.4pt}\par
+		\vspace*{-1mm}
+		#2
+	\end{minipage}\par
+	\vspace*{2mm}}
 \renewcommand\maketitle{%
 	\pagenumbering{alph}
 	\config@hypersetup
@@ -294,29 +308,19 @@ top=2.5cm,bottom=2.5cm,left=3.0cm,right=3.0cm]{geometry}
 	\end{center}\par
 	\vspace*{4mm}
 	\frontpage@maintext
-	\vspace*{8mm}
-	\noindent\local@approvedname:\par
-	\begin{center}
-		\begin{flushright}
-			\vskip16\p@ \baselineskip12pt
-			\eqparbox{signture@list}{\hrulefill}\\
-			\eqparbox{signture@list}{\protect%\centering%
-				\ \ \ \ \ \ \ \ \ \ \@adtitle\ \@adname\ \@adsurn, \@addegree\ \ \ \ \ \ \ \ \ \ }\\
-			\ifthenelse{\equal{\@coadname}{\@empty}}{}{%
-				\vskip26\p@ \baselineskip12pt
-				\eqparbox{signture@list}{\hrulefill}\\
-				\eqparbox{signture@list}{\protect%\centering%
-					\ \ \ \ \ \ \ \ \ \ \@coadtitle\ \@coadname\ \@coadsurn, \@coaddegree\ \ \ \ \ \ \ \ \ \ }\\}
-			\count1=0
-			\@whilenum \count1<\@examiner \do {
-				\vskip26\p@ \baselineskip12pt
-				\eqparbox{signture@list}{\hrulefill}\\
-				\eqparbox{signture@list}{\protect%\centering%
-					\ \ \ \ \ \ \ \ \ \ \csname S:\the\count1 \endcsname\ \ \ \ \ \ \ \ \ \ }\\
-				\advance\count1 by 1}
-		\end{flushright}
-	\end{center}
-	\vspace*{\fill}
+		\vspace*{4mm}
+		\approval@signature{Autor}{\@authname\ \@authsurn}
+		\approval@signature{Orientador}{%
+			\@adtitle\ \@adname\ \@adsurn, \@addegree}
+		\ifthenelse{\equal{\@coadname}{\@empty}}{}{%
+			\approval@signature{Coorientador}{%
+				\@coadtitle\ \@coadname\ \@coadsurn, \@coaddegree}}
+		\count1=0
+		\@whilenum \count1<\@examiner \do {%
+			\approval@signature{Examinador}{%
+				\csname S:\the\count1\endcsname}
+			\advance\count1 by 1}
+		\vspace*{\fill}
 	\frontpage@bottomtext}
 \newcommand\config@hypersetup{%
 	\begingroup
@@ -635,17 +639,16 @@ top=2.5cm,bottom=2.5cm,left=3.0cm,right=3.0cm]{geometry}
 					{\MakeUppercase\local@monthname\ DE \number\year}
 				\end{center}%
 			}
-			\newcommand\abstract@toptext{%
-				\noindent Resumo do Projeto de Graduação apresentado
-				\sloppy\nohyphens{{\` a} Escola Politécnica/UFRJ como parte dos requisitos
-					necessários para a obtenção do grau de
-					\local@degname\ Eletrônico e de Computação }
-			}
-			\newcommand\foreignabstract@toptext{%
-				\noindent \sloppy\nohyphens{Abstract of \foreign@doctype\ presented to
-					POLI/UFRJ as a partial fulfillment of the requirements for the
-					degree of Electronic and Computer  \foreign@degname\ }
-			}
+				\newcommand\abstract@toptext{%
+					\begin{center}
+						\textbf{RESUMO}
+					\end{center}
+				}
+				\newcommand\foreignabstract@toptext{%
+					\begin{center}
+						\textbf{ABSTRACT}
+					\end{center}
+				}
 			%% 
 			%%
 			%% End of file `poli.cls'.

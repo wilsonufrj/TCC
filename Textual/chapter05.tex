@@ -31,13 +31,27 @@ O registro das entregas realizadas representa uma das funcionalidades mais impor
 Também foi definido o caso de uso de acompanhamento do edital por meio de um dashboard. Esse dashboard tem como objetivo apresentar de forma visual e organizada o andamento da chamada pública, indicando informações como produtos entregues, valores acumulados, famílias participantes e ciclos já realizados.
 
 A Tabela~\ref{tab:casos-uso-sistema} apresenta uma síntese dos casos de uso identificados para o sistema.
-\begin{table}[H]
-\centering
+\begingroup
+\renewcommand{\baselinestretch}{1}\small\selectfont
+\renewcommand{\arraystretch}{1.1}
+\begin{longtable}{|p{3.2cm}|p{4.2cm}|p{6.1cm}|}
 \caption{Principais casos de uso do sistema}
-\label{tab:casos-uso-sistema}
-\begin{tabular}{|p{4cm}|p{5cm}|p{6cm}|}
+\label{tab:casos-uso-sistema} \\
 \hline
 \textbf{Ator} & \textbf{Caso de uso} & \textbf{Descrição} \\ \hline
+\endfirsthead
+
+\multicolumn{3}{c}{\tablename\ \thetable{} -- continuação} \\
+\hline
+\textbf{Ator} & \textbf{Caso de uso} & \textbf{Descrição} \\ \hline
+\endhead
+
+\hline
+\multicolumn{3}{r}{Continua na próxima página.} \\
+\endfoot
+
+\hline
+\endlastfoot
 
 Agricultor & Solicitar cadastro & Permite que uma pessoa solicite acesso ao sistema. \\ \hline
 
@@ -47,7 +61,7 @@ Coordenador/\newline Administrador & Gerenciar famílias & Permite cadastrar, ed
 
 Coordenador/\newline Administrador  & Criar edital & Permite cadastrar uma chamada pública do PAA e suas informações principais. \\ \hline
 
-Administrador & Gerenciar produtos & Permite cadastrar os produtos previstos no edital \\ \hline
+Administrador & Gerenciar produtos & Permite cadastrar os produtos previstos no edital. \\ \hline
 
 Administrador & Gerenciar destinos & Permite cadastrar as organizações e equipamentos que receberão os alimentos. \\ \hline
 
@@ -63,8 +77,8 @@ Agricultor & Consultar informações da participação & Permite acompanhar prod
 
 Administrador & Manter o sistema & Permite realizar ajustes, correções e evolução da plataforma. \\ \hline
 
-\end{tabular}
-\end{table}
+\end{longtable}
+\endgroup
 
 \section{Modelagem do domínio e estrutura dos dados}
 
@@ -855,5 +869,3 @@ Durante o desenvolvimento do sistema, foi utilizado o Git como ferramenta de con
 Com o objetivo de apoiar a integração contínua de novas funcionalidades e padronizar o processo de construção da aplicação, foi configurado, em cada projeto, um arquivo chamado \texttt{.gitlab-ci.yml}. Esse arquivo é responsável por definir as etapas executadas automaticamente pelo GitLab CI/CD, como a verificação do código, acionamento de testes automatizados, a execução do build e a geração de uma nova imagem Docker. No backend, esse processo utiliza o Maven para executar as etapas de teste e construção da aplicação. No frontend, o processo utiliza o Vite para gerar a versão de produção da interface. Neste primeiro momento a aplicação possui somente testes automatizados para pontos essenciais e comportamentos críticos do sistema. Após a criação da imagem, ela é publicada no Docker Hub, possibilitando que a versão mais recente da aplicação esteja disponível para implantação no ambiente de homologação.
 
 O ambiente de homologação da aplicação encontra-se em uma VPS hospedada na Hostinger. Nesse ambiente, o deploy ainda é realizado de forma manual. Para isso, existe um script no servidor responsável por remover as imagens locais dos containers, baixar as versões mais recentes publicadas no Docker Hub e executar novamente o Docker Compose, fazendo com que os serviços da aplicação sejam atualizados e disponibilizados online.
-
-

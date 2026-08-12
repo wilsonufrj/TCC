@@ -61,20 +61,38 @@
     morestring=[b]"
 }
 
+\renewcommand{\lstlistingname}{Código:}
+\renewcommand{\lstlistlistingname}{Lista de Códigos}
+
+\makeatletter
+\newcommand{\listofcodes}{%
+    \if@twocolumn
+        \@restonecoltrue\onecolumn
+    \else
+        \@restonecolfalse
+    \fi
+    \chapter*{\lstlistlistingname}%
+    \addcontentsline{toc}{chapter}{\lstlistlistingname}%
+    \@mkboth{\MakeUppercase\lstlistlistingname}%
+        {\MakeUppercase\lstlistlistingname}%
+    \@starttoc{lol}%
+    \if@restonecol\twocolumn\fi
+}
+\makeatother
+
 \makelosymbols
-\makeloabbreviations
 
 \begin{document}
   \title{Biribá: Sistema web para a gestão do Programa de Aquisição de Alimentos}
-  \foreigntitle{TCC Title}
+  \foreigntitle{Biribá: Web System for Managing the Food Acquisition Program}
   \author{Wilson}{Albuquerque Ramos}
-  \advisor{Prof.}{Celso Alexandre}{Souza de Alvear}{D.Sc.}
+  \advisor{}{Celso Alexandre}{Souza de Alvear}{D.Sc.}
   %\coadvisor{Prof.}{Nome}{Sobrenome}{D.Sc.}
-  \examiner{Prof.}{Nome Completo}{Ph.D.}
-  \examiner{Prof.}{Nome Completo}{D.Sc.}
+  \examiner{}{Flávio Luis de Mello}{D.Sc.}
+  \examiner{}{Felipe Dias de Rezende Machado}{M.Sc.}
   %\examiner{Prof.}{Nome Completo}{D.Sc.}
   \department{DEL} %UTTILIZE A SIGLA DO SEU DEPARTAMENTO MODIFICAR OS NOMES DE CURSO, DEPARTAMENTO E OBTENÇÃO DE GRAU (Obs: caso tenha algum equívoco nesses argumentos, necessário modificar o arquivo poli.cls no local que faz a leitura deste argumento)
-  \date{2}{2023}
+  \date{8}{2026}
   \keyword{Tecnologia social}
   \keyword{Software Livre}
   \keyword{Gestão comunitária}
@@ -86,11 +104,12 @@
   \include{Pre-textual/thanks}
   \include{Pre-textual/resumo}
   \include{Pre-textual/abstract}
+  \include{Pre-textual/siglas}
   \tableofcontents
   \listoffigures
   \listoftables
+  \listofcodes
   \printlosymbols
-  \printloabbreviations
 
   \mainmatter
     \include{Textual/chapter01}
