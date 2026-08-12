@@ -28,7 +28,38 @@
 \usepackage{diagbox}
 \usepackage{natbib}
 
+\usepackage{listings}
+\usepackage{xcolor}
+
 %\usepackage[alf, bibjustif]{abntex2cite}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    stringstyle=\color{orange},
+    breaklines=true,
+    frame=single,
+    showstringspaces=false,
+    tabsize=4
+}
+
+\lstdefinelanguage{TypeScript}{
+    sensitive=true,
+    morekeywords={
+        async,await,break,case,catch,class,const,continue,default,
+        delete,do,else,export,extends,false,finally,for,function,
+        if,import,in,instanceof,interface,let,new,null,number,
+        private,public,readonly,return,string,super,switch,this,
+        throw,true,try,type,typeof,undefined,var,void,while
+    },
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]',
+    morestring=[b]"
+}
 
 \makelosymbols
 \makeloabbreviations

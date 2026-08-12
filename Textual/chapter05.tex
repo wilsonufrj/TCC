@@ -1,14 +1,13 @@
 \chapter{Implementação}
 \label{chap5}
 
-O desenvolvimento do projeto teve início no segundo semestre de 2024, no âmbito da disciplina Software Livre e Metodologias Participativas. Após o término da disciplina, o projeto passou a integrar as atividades do projeto de extensão Tecnologia da Informação, Democracia e Movimentos Sociais (TICDeMoS), vinculado ao SOLTEC/UFRJ. Desde o início, a proposta contou com o acompanhamento da antiga gestora do PAA no PDS Osvaldo de Oliveira, que contribuiu com sua experiência para a modelagem do sistema e para a definição dos principais casos de uso.
-
+O desenvolvimento do projeto teve início no segundo semestre de 2024, no âmbito da disciplina Software Livre e Metodologias Participativas. Após o término da disciplina, o projeto passou a integrar as atividades do projeto de extensão Tecnologia da Informação, Democracia e Movimentos Sociais (TICDEMOS), vinculado ao SOLTEC/UFRJ. Desde o início, a proposta contou com o acompanhamento da antiga gestora do PAA no PDS Osvaldo de Oliveira, que contribuiu com sua experiência para a modelagem do sistema e para a definição dos principais casos de uso.
 Ao longo do desenvolvimento, a proposta passou por mudanças em sua organização técnica e funcional. Inicialmente, o sistema estava voltado para um único assentamento e com criação de uma base mínima que permitisse cadastrar usuários, famílias, produtos, ciclos, destinos e editais. Em 2025, a proposta foi apresentada à equipe da Companhia Nacional de Abastecimento do Rio de Janeiro (CONAB-RJ). Após a reunião, vimos que além do cadastro das informações essenciais do edital deveríamos contemplar o cadastro de coletivos, um painel de acompanhamento que mostrasse de forma clara o andamento do projeto e a geração de relatórios que apoiam a comprovação das entregas, visualizando valores a receber pelas famílias agricultoras, além de, facilitar a consolidação dos dados de entregas pelo coordenador.
 
 
 \section{Requisitos do Sistema}
 
-O levantamento dos requisitos do sistema foi realizado a partir de duas frentes diferentes, a primeira através de diálogo com a gestora do PAA no assentamento para entender seu dia-a-dia e como funcionava o diálogo com os agricultores e a segunda da análise baseado em planilhas no excel que mostrava o funcionamento da gestão do programa no Assentamento PDS Osvaldo de Oliveira. Inicialmente, o foco era entender como as informações das chamadas públicas eram organizadas, quais atividades eram realizadas durante a execução dos editais e quais dificuldades estavam presentes no processo de acompanhamento. Observou-se que o gerenciamento do edital envolve diferentes informações, como quais famílias agricultoras estão participando, quais produtos foram selecionados, quantas entregas foram realizadas, quais destinos receberão os alimentos e quais são os valores a receber por agricultor, além das informações para o gerenciamento do edital, era necessário gerar documentos que comprovassem as entregas.
+O levantamento dos requisitos do sistema foi realizado a partir de duas frentes diferentes, a primeira através de diálogo com a gestora do PAA no assentamento para entender seu dia-a-dia e como funcionava o diálogo com os agricultores e a segunda da análise baseado em planilhas no excel que mostrava o funcionamento da gestão do programa no Assentamento PDS Osvaldo de Oliveira. Inicialmente, o foco era entender como as informações das chamadas públicas eram organizadas, quais atividades eram realizadas durante a execução dos editais e quais dificuldades estavam presentes no processo de acompanhamento. Observou-se que o gerenciamento do edital envolve diferentes informações, como quais famílias agricultoras estão participando, quais produtos foram selecionados, quantas entregas foram realizadas, quais destinos receberão os alimentos e quais são os valores a receber por agricultor, além das informações para o gerenciamento do edital, era necessário gerar documentos que comprovem as entregas.
 
 \subsection{Casos de uso do sistema}
 
@@ -23,20 +22,15 @@ O segundo caso de uso é a aprovação de usuários. Essa funcionalidade permite
 Outro caso de uso central é o cadastro e gerenciamento de famílias. Essa funcionalidade permite registrar as famílias agricultoras no sistema, editar suas informações e associar usuários a uma determinada família. Esse vínculo é necessário para que o sistema consiga relacionar as entregas, os produtos e os valores a cada unidade produtiva.
 
 O sistema também possui o caso de uso relacionado à criação e gerenciamento de editais. O edital representa a chamada pública do PAA e reúne as principais informações do processo. A partir dele, são organizados os produtos, os destinos, os ciclos e as entregas.
-
 O cadastro de produtos no sistema também é um dos principais casos de uso. Nele, o administrador registra os produtos que fazem parte do sistema e que são utilizados para a vinculação a um edital.
-
 O cadastro de destinos também compõe os principais casos de uso. Essa funcionalidade permite registrar as organizações e equipamentos de segurança alimentar que receberão os alimentos.
-
 A criação de ciclos de entrega é outro caso de uso fundamental. Como as entregas do PAA ocorrem de forma periódica, geralmente semanal, o sistema precisa organizar o edital em ciclos. Cada ciclo representa uma etapa de entrega e permite registrar os produtos movimentados em determinado período.
 
 O registro das entregas realizadas representa uma das funcionalidades mais importantes do sistema. Por meio desse caso de uso, o coordenador informa quais famílias entregaram produtos, quais produtos foram entregues, em quais quantidades e para quais destinos. A partir desses dados, o sistema pode consolidar informações sobre o andamento do edital e calcular os valores correspondentes.
 
 Também foi definido o caso de uso de acompanhamento do edital por meio de um dashboard. Esse dashboard tem como objetivo apresentar de forma visual e organizada o andamento da chamada pública, indicando informações como produtos entregues, valores acumulados, famílias participantes e ciclos já realizados.
 
-
 A Tabela~\ref{tab:casos-uso-sistema} apresenta uma síntese dos casos de uso identificados para o sistema.
-
 \begin{table}[H]
 \centering
 \caption{Principais casos de uso do sistema}
@@ -136,6 +130,315 @@ Para lidar com questões de segurança da aplicação, foi inserido no projeto o
 Para os testes unitários, foram utilizadas as bibliotecas JUnit e Mockito. O JUnit permite estruturar e executar os testes automatizados, enquanto o Mockito possibilita simular comportamentos de componentes da aplicação, como serviços e repositórios. Essas ferramentas contribuem para validar processos críticos, como criação, atualização e consulta de dados, além de ajudar a garantir que mudanças futuras no código não comprometam comportamentos já implementados. O gerenciamento das dependências, a execução dos testes e a geração do pacote da aplicação foram organizados por meio do Maven, mantendo uma estrutura padronizada para o projeto backend.
 
 Na documentação da API, foi utilizado o OpenAPI/Swagger, por ser uma ferramenta open-source que gera uma interface interativa para visualização e teste dos endpoints da aplicação. Com isso, torna-se possível consultar os recursos disponíveis, verificar os parâmetros esperados e testar requisições diretamente pela própria aplicação, sem a necessidade inicial de ferramentas externas. 
+
+\subsection{Desafios de implementação do backend}
+
+Com o objetivo de apresentar os principais desafios técnicos enfrentados durante o desenvolvimento do backend, esta seção analisa implementações que são complexas na  modelagem, integração e controle das entidades do sistema. 
+
+O primeiro trecho de código é referente à implementação responsável pelo cadastro de produtos no plano original, destacando seu funcionamento e as decisões adotadas para manter a consistência dos dados. 
+
+\begin{lstlisting}[language=Java, caption={Serviço de adicionar produtos ao edital}, label={lst:servico_adicionar_produto_edital}]
+@Override
+public List<ProdutoEditalDTO> adicionarProdutoEdital(List<Long> idProdutos, Lon idPlanoOriginal) {
+
+    PlanoOriginal planoOriginal = planoOriginalRepository.findById(idPlanoOriginal)
+            .orElseThrow(() -> new RuntimeException("Erro ao encontrar o plano original"));
+
+    List<ProdutoEdital> produtosEdital = planoOriginal.getProdutos();
+
+idProdutos.forEach(id -> {
+    Optional<Produto> oProduto = this.produtoRepository.findById(id);
+    if (oProduto.isPresent()) {
+        Produto produto = oProduto.get();
+
+        ProdutoEdital produtoEdital = new ProdutoEdital();
+        produtoEdital.setNome(produto.getNome());
+        produtoEdital.setPreco(new BigDecimal("0.0"));
+        produtoEdital.setQuantidade(0L);
+        produtoEdital.setPlanoOriginal(planoOriginal);
+        produtosEdital.add(produtoEditalRepository.save(produtoEdital));
+    }
+});
+
+planoOriginal.setProdutos(produtosEdital);
+
+return planoOriginalRepository.save(planoOriginal).getProdutos()
+        .stream()
+        .filter(produtoEdital ->
+                Objects.isNull(produtoEdital.getDestinoProdutoEdital()) && Objects.isNull(produtoEdital.getFamiliaProdutoEdital())
+        )
+        .map(PlanoOriginalService::toProdutoEditalDTO)
+        .toList();
+}
+\end{lstlisting}
+
+Essa função é responsável por adicionar produtos a um plano original. O método recebe como parâmetros uma lista com os identificadores dos produtos previamente cadastrados no sistema e o identificador do plano original que será atualizado. Inicialmente, o plano é consultado no banco de dados por meio do repositório correspondente. Caso o registro não seja encontrado, uma exceção é lançada, impedindo a continuidade da operação com dados inexistentes.
+
+Após a recuperação do plano original, é obtida a lista de produtos já associados a ele. Em seguida, o código percorre os identificadores recebidos. Para cada item, é realizada uma consulta no repositório de produtos. Quando o produto é localizado, uma nova entidade ProdutoEdital é criada e preenchida com as informações necessárias. Essa entidade representa a relação entre um produto cadastrado globalmente na aplicação e sua utilização dentro de um edital específico.
+
+Outro desafio de implementação foi a criação de ciclos dentro do sistema. O cógido abaixo mostra a implementação da criação de um ciclo.
+
+\begin{lstlisting}[language=Java, caption={Serviço para criação de ciclos dentro do sistema}, label={lst:servico_criar_ciclo}]
+@Override
+public CicloDTO createCiclo(CicloRequest cicloDTO, Long idEdital) {
+
+    Edital edital = editalService.getEdital(idEdital);
+
+    Ciclo ciclo = new Ciclo();
+    ciclo.setEntregas(new ArrayList<>());
+
+    Set<Familia> familias = edital.getPlanoOriginal().getFamiliasProdutoEdital()
+            .stream()
+            .map(FamiliaProdutoEdital::getFamilia)
+            .collect(Collectors.toSet());
+
+    edital.getPlanoOriginal()
+        .getFamiliasProdutoEdital()
+            .forEach(familiaProdutoEdital -> {
+                Entrega entrega = new Entrega();
+                entrega.setCiclo(ciclo);
+                entrega.setFamilia(familiaProdutoEdital.getFamilia());
+                entrega.setItens(new ArrayList<>());
+                entrega.setDestino(null);
+
+                familiaProdutoEdital.getProdutos()
+                    .forEach(produtoEdital -> {
+                        EntregaItem entregaItem = new EntregaItem();
+
+                        entregaItem.setEntrega(entrega);
+                        entregaItem.setProdutoEdital(produtoEdital);
+                        entregaItem.setQuantidadeEntregue(0);
+                        entrega.addItem(entregaItem);
+
+                    });
+
+                ciclo.addEntregas(entrega);
+
+            });
+
+    edital
+    .getPlanoOriginal()
+        .getDestinosProdutoEdital()
+        .forEach(destinoProdutoEdital -> {
+            Entrega entrega = new Entrega();
+            entrega.setCiclo(ciclo);
+            entrega.setFamilia(null);
+            entrega.setItens(new ArrayList<>());
+            entrega.setDestino(destinoProdutoEdital.getDestino());
+
+            destinoProdutoEdital.getProdutos()
+                .forEach(produtoEdital -> {
+                    EntregaItem entregaItem = new EntregaItem();
+
+                    entregaItem.setEntrega(entrega);
+                    entregaItem.setProdutoEdital(produtoEdital);
+                    entregaItem.setQuantidadeEntregue(0);
+                    entrega.addItem(entregaItem);
+
+                });
+
+            ciclo.addEntregas(entrega);
+
+        });
+
+    StatusCiclo statusCiclo = isBetween(LocalDate.now(),cicloDTO.dataInicio(),cicloDTO.dataFim())
+            ?StatusCiclo.ABERTO
+            :StatusCiclo.AGUARDANDO;
+
+    ciclo.setNome(cicloDTO.nome());
+
+    verifyDateCiclo(cicloDTO, edital);
+    ciclo.setDataInicio(cicloDTO.dataInicio());
+    ciclo.setDataFim(cicloDTO.dataFim());
+
+    ciclo.setAprovacaoCoordenacao(false);
+
+    ciclo.setStatusCiclo(statusCiclo);
+
+    ciclo.setEdital(edital);
+    ciclo.setFamilias(familias);
+
+    edital.addCiclo(ciclo);
+
+    try {
+        Ciclo cicloSaved = cicloRepository.save(ciclo);
+        return CicloService.toDto(cicloSaved);
+    }catch (Exception e) {
+        log.info("Erro ao salvar o ciclo: {}",e.getMessage());
+    }
+
+    return null;
+}
+\end{lstlisting}
+
+Nesse trecho é apresentada a função responsável pela criação de um ciclo de entregas associado a um edital. O método recebe como parâmetros um objeto CicloRequest, contendo os dados necessários para o cadastro, e o identificador do edital ao qual o ciclo será vinculado. Inicialmente, o edital é recuperado no banco de dados e, em seguida, uma nova entidade Ciclo é criada com sua lista de entregas inicializada.
+
+Após essa etapa, são identificadas as famílias participantes a partir das associações previamente cadastradas no plano original do edital. Para cada relação entre família e produto, é criada uma entrega vinculada ao ciclo e à respectiva família. Em seguida, são gerados os itens da entrega, relacionando cada produto previsto e inicializando sua quantidade entregue com o valor zero. Esse processo permite que o ciclo seja criado já contendo a estrutura necessária para o registro das entregas realizadas posteriormente.
+
+O mesmo procedimento é aplicado aos destinos cadastrados no plano original. Para cada destino, é criada uma nova entrega sem associação direta com uma família, mas vinculada aos produtos previstos para aquele local. Dessa forma, o ciclo reúne tanto as entregas organizadas por família quanto aquelas relacionadas aos destinos definidos no edital.
+
+Outro ponto tratado pelo método é a definição automática do status inicial do ciclo. Caso a data atual esteja dentro do período informado, o ciclo é criado com o status ABERTO, caso contrário, permanece como AGUARDANDO. Antes do armazenamento, as datas são validadas, e também são definidos o nome, a situação de aprovação da coordenação, o edital relacionado e o conjunto de famílias participantes.
+
+Também podemos  destacar a geração automática dos termos de recebimento. Essa funcionalidade utiliza os dados cadastrados durante a execução do ciclo para preencher um documento padronizado, reduzindo a necessidade de elaboração manual. No trecho de código apresentado abaixo, é possível observar a implementação responsável por gerar esse documento.
+
+\begin{lstlisting}[language=Java, caption={Serviço geração do termo de recebimento}, label={lst:servico_gerar_termo_recebimento}]
+
+public byte[] gerarTermoRecebimento(
+        Long cicloId,
+        UUID userUuid,
+        Long destinoUuid
+) throws IOException, Docx4JException, JAXBException {
+
+    Ciclo ciclo = cicloService.getCiclo(cicloId);
+
+    Usuario usuario = usuarioService.getUsuario(userUuid);
+    Coletivo coletivo = usuario.getColetivo();
+
+    Destino destino = destinoService.getDestino(destinoUuid);
+
+    WordprocessingMLPackage pkg =
+            WordprocessingMLPackage.load(
+                    new ClassPathResource("template/TermoRecebimentoTemplate.docx").getInputStream()
+            );
+
+    List<Item> itens = new ArrayList<>();
+    ciclo.getEntregas()
+        .stream()
+        .filter(entrega -> Objects.nonNull(entrega.getDestino()))
+        .filter(entrega -> entrega.getDestino().getId().equals(destino.getId()))
+        .forEach(entrega -> {
+            entrega.getItens().forEach(entregaItem -> {
+                Item item = new Item(
+                        entregaItem.getProdutoEdital().getNome(),
+                        "Kg",
+                        entregaItem.getQuantidadeEntregue(),
+                        entregaItem.getProdutoEdital().getPreco().doubleValue()
+                );
+                itens.add(item);
+            });
+        });
+
+    List<Object> tables = pkg.getMainDocumentPart().getJAXBNodesViaXPath("//w:tbl", true);
+    if (tables.isEmpty()) {
+        throw new RuntimeException("Nenhuma tabela encontrada no documento.");
+    }
+
+    Tbl table = unwrap(tables.get(0));
+
+    List<Tr> rows = table.getContent().stream()
+            .filter(o -> o instanceof Tr)
+            .map(o -> (Tr) o)
+            .collect(Collectors.toList());
+
+    if (rows.size() < 3) {
+        throw new RuntimeException("Tabela precisa ter pelo menos: header, linha modelo e total.");
+    }
+
+    Tr modelRow = rows.get(4);
+
+    Tr totalRow = rows.get(rows.size() - 1);
+
+    table.getContent().remove(modelRow);
+
+    double totalGeral = 0.0;
+
+    for (Item item : itens) {
+        Tr newRow = XmlUtils.deepCopy(modelRow);
+
+        double totalItem = item.quantidade * item.valorUnitario;
+        totalGeral += totalItem;
+
+        setCellText(newRow, 0, item.produto);
+        setCellText(newRow, 1, item.unidade);
+        setCellText(newRow, 2, formatNumber(item.quantidade));
+        setCellText(newRow, 3, formatNumber(item.valorUnitario));
+        setCellText(newRow, 4, formatNumber(totalItem));
+
+        table.getContent().add(table.getContent().size() - 1, newRow);
+    }
+
+    setCellText(totalRow, 1, formatNumber(totalGeral));
+
+    Map<String, String> finalPage = new HashMap<>();
+
+    finalPage.put("destino", destino.getNome());
+    finalPage.put("cnpj", Utils.formatCnpj(destino.getCnpj()));
+
+    finalPage.put("endereco", destino.getEndereco());
+    finalPage.put("municipio", "Rio de Janeiro/RJ");
+    finalPage.put("cep", "21.450-250");
+    finalPage.put("representanteDestino", destino.getRepresentante().getNome());
+    finalPage.put("cpfRepresentante", Utils.formatCpf(destino.getRepresentante().getCpf()));
+    finalPage.put("dataRecebimento", LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+    finalPage.put("assentamento", coletivo.getNome());
+
+    finalPage.put("valorTotalFinal", formatNumber(totalGeral));
+    finalPage.put("municipioFinal","MACAE/RJ");
+    finalPage.put("dataFinal",LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+    finalPage.put("representanteRecebedora", destino.getRepresentante().getNome());
+    finalPage.put("cpfRepresentanteRecebedora", Utils.formatCpf(destino.getRepresentante().getCpf()));
+
+    finalPage.put("representanteRornecedora",coletivo.getRepresentante().getNome());
+    finalPage.put("cargoRepresetanteFornecedora",coletivo.getRepresentante().getCargo());
+    finalPage.put("cpfRepresentanteFornecedora",Utils.formatCpf(coletivo.getRepresentante().getCpf()));
+
+    pkg.getMainDocumentPart().variableReplace(finalPage);
+
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    pkg.save(baos);
+
+    return baos.toByteArray();
+}
+
+\end{lstlisting}
+
+A função recebe como parâmetros o identificador do ciclo, o identificador do usuário responsável pela solicitação e o identificador do destino relacionado ao recebimento. As informações são utilizadas para recuperar o ciclo, o usuário e o destino no banco de dados. A partir do usuário, também é obtido o coletivo ao qual ele pertence, uma vez que seus dados são necessários para identificar a organização fornecedora no termo.
+
+Em seguida, o método carrega um arquivo no formato DOCX que funciona como modelo para o documento. Esse arquivo possui uma estrutura previamente definida, com campos de texto e uma tabela que serão preenchidos durante a execução, o template criado está armazenado no sistema. Dessa forma, a aplicação consegue manter a padronização visual do termo de recebimento sem precisar construir toda a formatação do documento diretamente no código.
+
+Após o carregamento do modelo, são selecionadas as entregas pertencentes ao ciclo que estão associadas ao destino informado. Para cada entrega encontrada, o método percorre seus itens e reúne informações como nome do produto, unidade de medida, quantidade entregue e valor unitário. Esses dados são organizados em uma lista auxiliar, que posteriormente será utilizada para preencher a tabela existente no documento.
+
+Na etapa seguinte, o método localiza a tabela no arquivo DOCX e identifica a linha utilizada como modelo para os produtos. Essa linha é copiada para cada item da lista, preservando a formatação previamente definida no documento. Em cada nova linha são inseridos o nome do produto, a unidade de medida, a quantidade entregue, o valor unitário e o valor total do item, calculado pela multiplicação entre a quantidade e o preço unitário. Durante esse processo, os valores individuais também são acumulados para obtenção do valor total geral do termo.
+
+Além da tabela de produtos, o método preenche os demais campos do documento por meio de um mapa de variáveis. Entre as informações adicionadas estão o nome e o CNPJ do destino, o endereço, os dados dos representantes, o nome do coletivo, a data de recebimento e o valor total calculado. Os números e documentos pessoais são formatados antes de serem inseridos, garantindo que valores monetários, CPF e CNPJ sejam apresentados de maneira adequada no arquivo final.
+
+Após o preenchimento de todas as informações, o documento é armazenado temporariamente em memória por meio de um fluxo de bytes. Ao final, o método retorna um vetor de bytes, permitindo que o termo seja disponibilizado para download pela camada responsável pela requisição, sem a necessidade de salvar uma cópia permanente do documento no servidor.
+
+Por último um processo que é complexo em sua estrutura e possui um comportamento fundamental na segurança da aplicação. O processo de login, abaixo, segue o trecho de código do service que valida o login da requisição.
+
+\begin{lstlisting}[language=Java, caption={Serviço de login}, label={lst:servico_login}]
+@Override
+public void login(AuthenticationRequest authenticationRequest, HttpServletResponse response) {
+
+    if(!this.userDetailsService.usuarioAprovado(authenticationRequest.getUsername())){
+        throw new UsuarioNaoLiberadoException("Usuario nao liberado");
+    }
+
+    authenticationManager.authenticate(
+        new UsernamePasswordAuthenticationToken(
+                authenticationRequest.getUsername(),
+                authenticationRequest.getPassword()));
+
+    CustomUserDetail userDetails = userDetailsService
+            .loadUserByUsername(authenticationRequest.getUsername());
+
+    String jwtToken = jwtUtil.generateToken(userDetails);
+    response.addCookie(jwtUtil.createJwtCookie(COOKIE_NAME, jwtToken));
+
+    processRefreshToken(response, userDetails.getUuid());
+
+}
+
+\end{lstlisting}
+
+A função recebe um objeto AuthenticationRequest, contendo o nome de usuário e a senha informados, além do objeto HttpServletResponse, utilizado para adicionar os dados de autenticação à resposta HTTP. Inicialmente, o método verifica se o usuário está aprovado para acessar o sistema. Caso o cadastro ainda não tenha sido liberado, é lançada a exceção UsuarioNaoLiberadoException, interrompendo o processo antes mesmo da validação das credenciais.
+
+Após a verificação da aprovação, o nome de usuário e a senha são encapsulados em um objeto UsernamePasswordAuthenticationToken. Esse objeto é enviado ao AuthenticationManager, responsável por validar as credenciais de acordo com as configurações de segurança da aplicação. Caso os dados estejam incorretos, o processo de autenticação é interrompido e o acesso ao sistema é negado.
+Com a autenticação realizada, os dados completos do usuário são recuperados por meio do UserDetailsService. Essas informações são utilizadas para gerar um token JWT, que identifica o usuário autenticado nas requisições posteriores. Em seguida, o token é armazenado em um cookie e adicionado à resposta HTTP, permitindo que o navegador envie automaticamente nas próximas comunicações com o backend.
+
+Além do token de acesso, o método chama a função responsável pelo processamento do refresh token. Para isso, utiliza o identificador único do usuário autenticado. Esse segundo token permite renovar a autenticação quando o JWT principal expirar, evitando que o usuário precise informar novamente suas credenciais durante uma sessão válida.
+
 
 \section{Implementação do frontend}
 
@@ -312,6 +615,239 @@ Por fim, há também o cadastro de usuários, representado na Figura~\ref{fig:us
     \label{fig:destinos-globais}
 \end{figure}
 
+\subsection{Desafios de implementação do frontend}
+
+Assim como na seção dedicada aos desafios de implementação do backend, esta seção apresenta os principais desafios encontrados durante o desenvolvimento do frontend.
+
+O primeiro desafio analisado corresponde à associação de famílias previamente cadastradas ao plano original de um edital em andamento.O plano original organiza os produtos em duas matrizes dinâmicas: uma por família e outra por destino. Nesse contexto, a interface precisa representar estruturas aninhadas recebidas da API, permitir sua edição e manter os dados sincronizados entre os componentes, o Redux e o backend. No trecho apresentado a seguir, destaca-se a implementação responsável por adicionar famílias ao plano original, verificando as associações existentes para evitar registros duplicados e atualizando o edital selecionado após a conclusão da requisição.
+
+\begin{lstlisting}[
+    language=TypeScript,
+    caption={Async Thunk para adicionar famílias ao edital},
+    label={lst:funcao_adicionar_familias_edital}
+]
+
+export const adicionaFamiliaEdital = createAsyncThunk<
+    { familias: FamiliaProdutoEdital[]; idEdital: number },
+    number[],
+    { state: RootState }
+>(
+    'edital/adicionaFamiliaEdital',
+    async (idFamilias: number[], { rejectWithValue, getState }) => {
+        try {
+            const editalState = getState().edital
+            const familias = getState().familia.familias
+
+            const filteredFamilias: Familia[] = familias.filter(
+                familia => idFamilias.includes(familia.id ?? 0)
+            )
+
+            const existingNamesFamilias = new Set(
+                editalState.editalSelected?.planoOriginal.familiasProdutoEdital
+                    .map(familiaProdutoEdital => familiaProdutoEdital.familia?.nome ?? "") ?? []
+            );
+
+            const diffId = filteredFamilias
+                .filter(familia => !existingNamesFamilias.has(familia?.nome ?? ""))
+                .map(familia => familia.id ?? 0);
+
+            const response = await api.post(
+                `v1/plano-original/${editalState.editalSelected?.planoOriginal.id}/familia-produtos`,
+                diffId
+            )
+
+            return {
+                familias: response.data,
+                idEdital: editalState.editalSelected?.id ?? -1
+            }
+        } catch (err) {
+            const error = err as AxiosError<ApiError>;
+            return rejectWithValue(
+                error.response?.data.message ?? 'Erro ao buscar as editais'
+            );
+        }
+    });
+
+\end{lstlisting}
+
+No trecho apresentado, é possível observar a função assíncrona responsável por selecionar as famílias informadas pelo usuário, evitar associações duplicadas e enviar ao backend apenas os novos registros.
+
+A função foi criada por meio do createAsyncThunk, recurso utilizado do redux para executar operações assíncronas integradas ao estado global da aplicação. Como parâmetro de entrada, ela recebe uma lista contendo os identificadores das famílias selecionadas. Seu retorno contém as famílias associadas ao plano original e o identificador do edital que foi atualizado. A tipagem também permite o acesso ao estado global por meio da interface RootState.
+
+Inicialmente, a função recupera do estado da aplicação o edital selecionado e a lista de famílias disponíveis. Em seguida, realiza uma filtragem para localizar apenas as famílias cujos identificadores estão presentes na lista recebida. Esse processo transforma os identificadores selecionados na interface em objetos que podem ser comparados com as famílias que já fazem parte do edital.
+
+Após essa etapa, é criado um conjunto contendo os nomes das famílias previamente associadas ao plano original. O uso da estrutura Set permite verificar de forma direta se determinada família já está cadastrada. Com base nessa comparação, a função mantém apenas as famílias que ainda não possuem associação com o edital e extrai seus identificadores para compor a requisição enviada ao backend.
+
+Em seguida, os identificadores das novas famílias são enviados por meio de uma requisição HTTP do tipo POST. O endereço da requisição é construído utilizando o identificador do plano original pertencente ao edital selecionado. Após a conclusão da operação, a função retorna os dados recebidos do backend juntamente com o identificador do edital, possibilitando a atualização correta do estado da interface.
+
+Caso ocorra uma falha durante o processo, o erro é convertido para o tipo \verb|AxiosError<ApiError>|. A função utiliza rejectWithValue para retornar a mensagem fornecida pelo backend ou, caso ela não esteja disponível, uma mensagem padrão. Dessa forma, o erro pode ser tratado pelos estados de rejeição da operação assíncrona e posteriormente apresentado ao usuário.
+Destaca-se também como um desafio técnico o controle das entregas realizadas ao longo dos ciclos de execução. Nesse processo, o sistema não considera apenas os dados registrados no ciclo atual, pois o acompanhamento de cada produto depende do histórico de entregas acumulado até o período selecionado. Essa abordagem permite comparar a quantidade inicialmente planejada com o total efetivamente entregue e identificar o saldo que ainda deve ser fornecido.
+
+Para realizar esse cálculo, a implementação percorre os ciclos anteriores e o ciclo atual, seleciona as entregas associadas à mesma família e acumula as quantidades registradas para o produto analisado. Além desse cálculo acumulado, o controle dos ciclos também envolve validação de datas, abertura e encerramento de períodos, estados de edição independentes para os itens e atualização de objetos aninhados no Redux, garantindo a consistência entre as informações apresentadas na interface e os dados armazenados no backend. No trecho a seguir, é apresentada a função responsável pelo cálculo da quantidade faltante de cada produto.
+
+\begin{lstlisting}[
+    language=TypeScript,
+    caption={Função que calcula quanto falta para um agricultor entregar},
+    label={lst:funcao_adicionar_familias_edital}
+]
+
+const calculaEntregaFaltante = (
+        familia: Familia,
+         entregaItem: EntregaItem) => {
+
+        const entregasFamilia: Entrega[] = [];
+        const cicloAtual = ciclos.find(ciclo => ciclo.id === cicloId);
+
+        if (!cicloAtual) return 0;
+
+        const previousCiclos = ciclos.filter(ciclo =>
+            dayjs(ciclo.dataFim).isSameOrBefore(dayjs(cicloAtual.dataFim))
+        );
+
+        previousCiclos.forEach(ciclo => {
+            ciclo.entregas?.forEach(entrega => {
+                if (entrega.familia?.id === familia.id) {
+                    entregasFamilia.push(entrega);
+                }
+            })
+        });
+
+        const quantidadePlanejada = entregaItem.produtoEditalDTO.quantidade;
+        let quantidadeEntregueTotal = 0;
+
+        entregasFamilia.forEach(entrega => {
+            entrega.entregaItens.forEach(item => {
+                if (item.produtoEditalDTO.id === entregaItem.produtoEditalDTO.id) {
+                    quantidadeEntregueTotal += item.quantidadeEntregue ?? 0;
+                }
+            });
+        });
+
+        return quantidadePlanejada - quantidadeEntregueTotal;
+
+    }
+\end{lstlisting}
+
+Na função apresentada, vemos que o processo utiliza dados do ciclo atual e dos ciclos anteriores para comparar a quantidade planejada no plano original com o total já entregue até o período selecionado.
+
+A função recebe como parâmetros a família responsável pela entrega e o item cujo saldo será calculado. Inicialmente, é criada uma lista para armazenar as entregas relacionadas à família. Em seguida, o ciclo atual é localizado por meio do identificador selecionado na interface. Caso nenhum ciclo correspondente seja encontrado, a função retorna o valor zero, evitando a execução do cálculo com dados inexistentes.
+
+Após identificar o ciclo atual, são selecionados todos os ciclos cuja data de término seja anterior ou igual à data de término do ciclo selecionado. Para realizar essa comparação, é utilizada a biblioteca dayjs. Dessa forma, o cálculo considera não apenas as entregas realizadas no ciclo atual, mas também aquelas registradas nos ciclos anteriores.
+
+Em seguida, a função percorre os ciclos selecionados e suas respectivas entregas. Durante esse processo, são mantidas apenas as entregas associadas à família recebida como parâmetro. Essa filtragem permite reunir o histórico de entregas da família até o ciclo atual, desconsiderando registros pertencentes a outras famílias.
+
+A quantidade planejada é obtida a partir dos dados do produto associado ao item da entrega. Depois disso, todas as entregas selecionadas são percorridas novamente para localizar itens relacionados ao mesmo produto. Quando o produto é encontrado, sua quantidade entregue é adicionada ao total acumulado. Caso o valor esteja ausente, considera-se zero, impedindo que dados ainda não preenchidos comprometam o cálculo.
+
+Ao final, a função subtrai a quantidade total entregue da quantidade planejada e retorna o saldo restante. Esse resultado pode ser utilizado pela interface para informar quanto ainda precisa ser entregue pela família em relação ao planejamento definido no edital.
+
+Entre os recursos implementados no frontend, destaca-se o dashboard analítico responsável por acompanhar a execução do edital. A interface reúne informações provenientes do plano original e dos ciclos de entrega para apresentar a evolução dos produtos ao longo do tempo. Nesse contexto, o sistema precisa organizar os dados por produto, família, destino e período, permitindo comparar as quantidades planejadas com aquelas efetivamente entregues. Essas informações são utilizadas na construção dinâmica de gráficos de barras, linhas e donut, oferecendo diferentes perspectivas sobre o andamento do edital. No trecho apresentado, a seguir, é definida a linha temporal utilizada pelos gráficos do dashboard. A implementação utiliza o useMemo, função do React,  para calcular e armazenar o intervalo somente quando os ciclos ou as datas do edital forem alterados. Essa estratégia evita que o processamento seja repetido em todas as renderizações do componente, contribuindo para o desempenho da interface. 
+
+\begin{lstlisting}[
+    language=TypeScript,
+    caption={Constante que define a timeline dos gráficos do dashboard},
+    label={lst:funcao_adicionar_familias_edital}
+]
+
+const timeline = useMemo<TimelineData>(() => {
+    const start = dayjs(editalSelected?.dataInicio).startOf("day");
+    const editalEnd = dayjs(editalSelected?.dataFim).startOf("day");
+
+    let lastCycleEnd: dayjs.Dayjs  = dayjs(0);
+    ciclos.forEach((ciclo) => {
+      const cicloEnd = dayjs(ciclo.dataFim).startOf("day");
+      if (!cicloEnd.isValid()) {
+        return;
+      }
+      if (!lastCycleEnd || cicloEnd.isAfter(lastCycleEnd)) {
+        lastCycleEnd = cicloEnd;
+      }
+    });
+
+    const end = lastCycleEnd?.isBefore(editalEnd) ? lastCycleEnd : editalEnd;
+
+
+    if (!start.isValid() || !end.isValid() || start.isAfter(end, "day")) {
+      return { start: null, end: null, xLabels: [] };
+    }
+
+    const xLabels: string[] = [];
+    let cursor = start;
+    while (cursor.isBefore(end, "day") || cursor.isSame(end, "day")) {
+      xLabels.push(cursor.format("YYYY-MM-DD"));
+      cursor = cursor.add(1, "day");
+    }
+
+    return { start, end, xLabels };
+  }, [ciclos, editalSelected?.dataInicio, editalSelected?.dataFim]);
+\end{lstlisting}
+
+Analisando o código percebemos que a data de início do edital é utilizada como ponto inicial da linha temporal. Também é recuperada a data final prevista para o edital. Ambas são normalizadas para o início do dia por meio da biblioteca dayjs, evitando diferenças causadas por horários durante as comparações.
+
+Em seguida, o código percorre todos os ciclos para localizar a data de término mais recente. Antes de utilizar cada data, a implementação verifica se ela é válida. Datas ausentes ou inválidas são desconsideradas, impedindo que comprometam a construção da série temporal. Ao encontrar um ciclo com término posterior ao último registrado, a variável lastCycleEnd é atualizada.
+
+A data final da linha temporal é definida a partir da comparação entre o encerramento do último ciclo e o término do edital. Caso o último ciclo termine antes do edital, sua data é utilizada como limite. Caso ultrapasse o período previsto, prevalece a data final do edital. Dessa forma, os gráficos representam somente o período efetivamente alcançado pelos ciclos, sem ultrapassar os limites estabelecidos para a execução do edital.
+
+Após a definição do intervalo, o código verifica se as datas são válidas e se o início não ocorre depois do término. Quando o período não pode ser construído, são retornados valores nulos e uma lista vazia de rótulos. Esse tratamento evita a geração de gráficos com intervalos inconsistentes ou dados temporais incorretos.
+
+Com o período validado, a implementação percorre todos os dias compreendidos entre as datas inicial e final. Cada data é formatada no padrão YYYY-MM-DD e adicionada à lista xLabels. O último dia também é incluído, permitindo que o eixo horizontal dos gráficos represente todo o intervalo analisado. Ao final, a função retorna a data inicial, a data final e os rótulos que serão utilizados na organização das entregas diárias.
+
+Assim como nos demais desafios de implementação do frontend, a autenticação e a autorização exigem a integração entre a interface, o estado global da aplicação e os mecanismos de segurança implementados no backend. Esse processo não se limita à validação das credenciais durante o login, pois também envolve a manutenção e a renovação da sessão, a recuperação dos dados do usuário autenticado e a restauração do acesso quando a aplicação é recarregada.
+
+Além da autenticação, a aplicação controla as funcionalidades disponíveis de acordo com o perfil do usuário. Os perfis de administrador, coordenador e agricultor possuem permissões e rotas iniciais distintas. Por esse motivo, a autorização é aplicada tanto na proteção das rotas quanto na validação do tipo de usuário e na filtragem das opções apresentadas no menu. Essa abordagem impede o acesso a páginas não autorizadas e adapta a interface às atividades que cada perfil pode executar.
+
+No trecho apresentado a seguir, destaca-se a função assíncrona responsável por enviar as credenciais ao backend e tratar as possíveis respostas do processo de login. A implementação diferencia situações como credenciais inválidas, usuário ainda não liberado e falhas internas do servidor, permitindo que a interface apresente mensagens específicas para cada caso. 
+
+\begin{lstlisting}[
+    language=TypeScript,
+    caption={Função de login do sistema},
+    label={lst:funcao_login_sistema}
+]
+export const login = createAsyncThunk(
+    'auth/login',
+    async (credentials: LoginCredentials, { rejectWithValue }) => {
+        try {
+            await api.post('v1/auth/login', credentials);
+        } catch (err) {
+            const error = err as AxiosError<ApiError>;
+            if (error.response?.status === 401) {
+                return rejectWithValue(
+                    error.response?.data.message ?? 'Credenciais invalidas. Verifique seu CPF e senha.'
+                );
+            }
+
+            if (error.response?.status === 403) {
+                return rejectWithValue(
+                    error.response?.data.message ?? 'Usuario nao liberado. Contate o coordenador.'
+                );
+            }
+
+            if (error.response?.status === 500) {
+                return rejectWithValue(
+                    error.response?.data.message ?? 'Erro interno no servidor. Tente novamente mais tarde.'
+                );
+            }
+
+            return rejectWithValue(
+                error.response?.data.message ?? 'Sistema fora do ar, por favor entre mais tarde.'
+            );
+        }
+    }
+);
+
+\end{lstlisting}
+
+A função recebe um objeto do tipo LoginCredentials, contendo as informações necessárias para autenticação, como CPF e senha. Em seguida, realiza uma requisição HTTP do tipo POST para o endpoint v1/auth/login, enviando as credenciais no corpo da requisição. O uso de await faz com que a função aguarde a resposta do backend antes de finalizar a operação.
+
+Quando a autenticação é concluída com sucesso, a função termina sem retornar dados. Nesse fluxo, o backend é responsável por adicionar os tokens de autenticação aos cookies da resposta. Portanto, o objetivo principal da requisição não é recuperar diretamente um token pelo corpo da resposta, mas permitir que o navegador armazene as credenciais de sessão configuradas pelo servidor. Posteriormente, outra operação pode consultar os dados do usuário autenticado e atualizar o estado da aplicação.
+
+Caso ocorra uma falha, o erro capturado é convertido para o tipo \verb|AxiosError<ApiError>| . Essa tipagem permite acessar de maneira estruturada o código de estado HTTP e a mensagem retornada pelo backend. A partir dessas informações, a função diferencia as principais situações de erro relacionadas ao processo de autenticação.
+
+Quando o backend retorna o estado 401, a função considera que as credenciais fornecidas são inválidas. Nesse caso, utiliza a mensagem recebida da API ou, caso ela não esteja disponível, informa que o usuário deve verificar o CPF e a senha. Para o estado 403, a aplicação entende que as credenciais podem estar corretas, mas o cadastro ainda não foi liberado, orientando o usuário a entrar em contato com o coordenador.
+
+O código também trata respostas com o estado 500, que representam falhas internas no servidor. Para essas situações, é retornada uma mensagem informando que ocorreu um erro no backend e que uma nova tentativa deve ser realizada posteriormente. Por fim, qualquer erro que não esteja entre os casos anteriores é tratado por uma mensagem genérica de indisponibilidade. Esse último fluxo também contempla falhas de conexão, interrupções de rede ou ausência de resposta do servidor.
+Em todas as situações de erro, é utilizado o rejectWithValue. Esse recurso permite que a mensagem seja encaminhada como conteúdo da ação rejeitada pelo Redux, facilitando sua utilização pelos redutores e componentes da interface. Dessa forma, o estado global pode registrar a falha e apresentar ao usuário uma mensagem correspondente ao problema ocorrido.
+
+
 \section{Integração e Deploy}
 
 Durante o desenvolvimento do sistema, foi utilizado o Git como ferramenta de controle de versão, permitindo o acompanhamento das alterações realizadas no código-fonte e facilitando o trabalho colaborativo entre os desenvolvedores. Para o armazenamento remoto dos repositórios, foi utilizado o GitLab, que também oferece recursos de integração contínua e entrega contínua.
@@ -319,6 +855,5 @@ Durante o desenvolvimento do sistema, foi utilizado o Git como ferramenta de con
 Com o objetivo de apoiar a integração contínua de novas funcionalidades e padronizar o processo de construção da aplicação, foi configurado, em cada projeto, um arquivo chamado \texttt{.gitlab-ci.yml}. Esse arquivo é responsável por definir as etapas executadas automaticamente pelo GitLab CI/CD, como a verificação do código, acionamento de testes automatizados, a execução do build e a geração de uma nova imagem Docker. No backend, esse processo utiliza o Maven para executar as etapas de teste e construção da aplicação. No frontend, o processo utiliza o Vite para gerar a versão de produção da interface. Neste primeiro momento a aplicação possui somente testes automatizados para pontos essenciais e comportamentos críticos do sistema. Após a criação da imagem, ela é publicada no Docker Hub, possibilitando que a versão mais recente da aplicação esteja disponível para implantação no ambiente de homologação.
 
 O ambiente de homologação da aplicação encontra-se em uma VPS hospedada na Hostinger. Nesse ambiente, o deploy ainda é realizado de forma manual. Para isso, existe um script no servidor responsável por remover as imagens locais dos containers, baixar as versões mais recentes publicadas no Docker Hub e executar novamente o Docker Compose, fazendo com que os serviços da aplicação sejam atualizados e disponibilizados online.
-
 
 
