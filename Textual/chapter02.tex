@@ -1,110 +1,95 @@
 \chapter{Tecnologias}
 \label{chap2}
+Para viabilizar a aplicação dos conceitos apresentados nos capítulos anteriores, contamos com uma ampla gama de tecnologias que auxiliam no desenvolvimento de sistemas web. 
+Dito isto, este capítulo tem como objetivo descrever o papel de cada tecnologia na arquitetura da solução utilizada no desenvolvimento do projeto Biribá, destacando suas principais características e como elas se relacionam para compor uma aplicação modular.
+Para a escolha das tecnologias que serão apresentadas a seguir, foram levados em consideração a ampla adoção do mercado, comunidades consolidadas e ativas e por último o fato de serem software livre possibilitando a redução dos custos de licenciamento e favorecendo a independência tecnológica durante o desenvolvimento e a evolução da aplicação.
 
 \section{Tecnologias de desenvolvimento backend}
+Quando se trata do desenvolvimento de aplicações empresariais, o ecossistema formado por Java e Spring Boot se destaca devido à sua ampla adoção na construção de sistemas corporativos . O Java compõe a base do desenvolvimento do backend, sendo uma linguagem orientada a objetos capaz de representar as regras de negócio da aplicação. Complementando essa estrutura, o Spring Boot fornece um conjunto de ferramentas que simplificam o desenvolvimento e a organização do sistema. Entre elas, destacam-se o Spring Web, responsável pela camada de comunicação da aplicação, o Spring Data JPA, utilizado para a persistência de dados, e o Spring Security, empregado na implementação dos mecanismos de segurança. Para complementar esse processo, o padrão JWT é utilizado para garantir a autenticação e a autorização das requisições realizadas ao backend. Em conjunto, essas tecnologias constituem a estrutura central da aplicação.
+Além da estrutura principal, escolhemos tecnologias que complementam esse ecossistema e ampliam suas capacidades. O PostgreSQL se integra naturalmente às soluções baseadas em Spring por meio das camadas de persistência de dados. Para facilitar a administração deste banco de dados, o pgAdmin disponibiliza uma interface gráfica que simplifica atividades de gerenciamento e consulta. No contexto do desenvolvimento, ferramentas como Swagger e JUnit também possuem forte integração com o ecossistema Spring, contribuindo, respectivamente, para a documentação de serviços e para a validação automatizada do comportamento da aplicação. Por fim, o Maven atua como a principal ferramenta de gerenciamento de dependências e automação de tarefas em projetos Java, sendo amplamente utilizado em conjunto com o Spring Boot para organizar bibliotecas externas e padronizar processos de compilação, testes e empacotamento da aplicação. 
 
 \subsection{Java 17}
-
-O Java 17 é uma linguagem de programação orientada a objetos amplamente utilizada no desenvolvimento de sistemas corporativos e aplicações de grande porte. Por se tratar de uma versão de suporte de longo prazo (\textit{Long-Term Support} -- LTS), oferece maior estabilidade, segurança e compatibilidade para projetos que demandam manutenção contínua. Sua adoção contribui para a construção de aplicações robustas, portáveis e com amplo suporte do ecossistema de desenvolvimento.
+O Java 17 é uma linguagem de programação orientada a objetos amplamente utilizada no desenvolvimento de sistemas corporativos e aplicações de grande porte. Por se tratar de uma versão de suporte de longo prazo (Long-Term Support – LTS), oferece maior estabilidade, segurança e compatibilidade para projetos que demandam manutenção contínua. Sua adoção contribui para a construção de aplicações robustas, portáveis e com amplo suporte do ecossistema de desenvolvimento.
 
 \subsection{Spring Boot 3}
-
 O Spring Boot 3 é um framework voltado à simplificação do desenvolvimento de aplicações baseadas na plataforma Spring. Sua principal proposta é reduzir a complexidade de configuração inicial, permitindo a criação de sistemas com maior agilidade e padronização. Além disso, fornece mecanismos que facilitam a organização modular da aplicação, a integração entre componentes e a configuração automatizada de diversos recursos.
 
 \subsection{Spring Web}
-
 O Spring Web é o módulo responsável pelo desenvolvimento da camada de comunicação da aplicação, especialmente no que se refere à construção de APIs e ao tratamento de requisições e respostas. Ele possibilita a definição de controladores, rotas e mecanismos de entrada e saída de dados, servindo como base para a interação entre clientes e serviços do sistema.
 
 \subsection{Spring Data JPA / Hibernate}
-
-O Spring Data JPA é uma tecnologia que simplifica o acesso e a manipulação de dados em aplicações Java, oferecendo uma abstração para operações de persistência. Em conjunto com o Hibernate, que atua como implementação do mapeamento objeto-relacional, permite relacionar entidades do sistema com tabelas do banco de dados. Essa combinação reduz a necessidade de escrita manual de consultas básicas, favorecendo produtividade, organização e manutenção do código.
+O Spring Data JPA é uma tecnologia que simplifica o acesso e a manipulação de dados em aplicações Java, oferecendo uma abstração para operações de persistência. Em conjunto com o Hibernate, que atua como implementação do mapeamento objeto-relacional, permite relacionar entidades do sistema com tabelas do banco de dados. Essa combinação reduz a necessidade de escrita manual de consultas básicas, favorecendo a produtividade, organização e manutenção do código.
 
 \subsection{Spring Security}
-
 O Spring Security é um framework voltado à segurança de aplicações, oferecendo mecanismos para autenticação, autorização e proteção de recursos. Seu uso permite controlar o acesso às funcionalidades do sistema com base em perfis, permissões e regras previamente definidas. Dessa forma, contribui para reforçar a proteção da aplicação contra acessos indevidos e para estruturar de maneira consistente as políticas de segurança adotadas.
 
 \subsection{JWT}
-
-O JWT (\textit{JSON Web Token}) é um padrão utilizado para representação segura de informações entre partes, sendo amplamente empregado em processos de autenticação e autorização. No contexto de sistemas distribuídos, ele permite que informações sobre a identidade do usuário e suas permissões sejam transmitidas de forma assinada, favorecendo a verificação de acesso sem a necessidade de armazenamento contínuo de sessão no servidor.
+O JWT (JSON Web Token) é um padrão utilizado para representação segura de informações entre partes, sendo amplamente empregado em processos de autenticação e autorização. No contexto de sistemas distribuídos, ele permite que informações sobre a identidade do usuário e suas permissões sejam transmitidas de forma assinada, favorecendo a verificação de acesso sem a necessidade de armazenamento contínuo de sessão no servidor.
 
 \subsection{PostgreSQL}
-
 O PostgreSQL é um sistema gerenciador de banco de dados relacional de código aberto, reconhecido por sua confiabilidade, desempenho e conformidade com padrões SQL. Ele oferece recursos avançados para armazenamento, consulta, integridade e segurança dos dados, sendo amplamente utilizado em aplicações que exigem consistência e escalabilidade na persistência das informações.
 
 \subsection{OpenAPI / Swagger}
-
-O OpenAPI é uma especificação voltada à descrição padronizada de interfaces de programação de aplicações (\textit{Application Programming Interfaces} -- APIs). O Swagger, por sua vez, corresponde a um conjunto de ferramentas que possibilita visualizar, documentar e testar APIs com base nessa especificação. O uso dessas tecnologias favorece a clareza na definição dos contratos da aplicação, facilita a comunicação entre equipes e contribui para a validação e o consumo dos serviços disponibilizados.
+O OpenAPI é uma especificação voltada à descrição padronizada de interfaces de programação de aplicações (Application Programming Interfaces – APIs). O Swagger, por sua vez, corresponde a um conjunto de ferramentas que possibilita visualizar, documentar e testar APIs com base nessa especificação. O uso dessas tecnologias favorece a clareza na definição dos contratos da aplicação, facilita a comunicação entre equipes e contribui para a validação e o consumo dos serviços disponibilizados.
 
 \subsection{Maven}
-
 O Maven é uma ferramenta de automação e gerenciamento de projetos utilizada principalmente em aplicações Java. Sua função envolve o controle de dependências, a padronização da estrutura do projeto e a automação de tarefas como compilação, testes e empacotamento. Dessa maneira, contribui para a organização do processo de desenvolvimento e para a reprodutibilidade da construção do software.
 
 \subsection{JUnit / Mockito}
-
 O JUnit é um framework amplamente utilizado para a elaboração e execução de testes automatizados em aplicações Java, especialmente testes unitários. O Mockito, por sua vez, complementa esse processo ao permitir a simulação de comportamentos de objetos e dependências externas. Em conjunto, essas ferramentas contribuem para a verificação do funcionamento do código, para o isolamento de componentes durante os testes e para o aumento da confiabilidade da aplicação.
 
 \subsection{pgAdmin}
-
 O pgAdmin é uma ferramenta gráfica de administração e gerenciamento do PostgreSQL. Sua utilização facilita atividades como visualização de tabelas, execução de consultas, monitoramento do banco e administração de estruturas de dados. Dessa forma, serve como apoio ao desenvolvimento e à manutenção do banco de dados, tornando mais acessíveis operações que poderiam ser realizadas apenas por linha de comando.
 
-\section{Tecnologias de desenvolvimento frontend}
+\subsection{Tecnologias de desenvolvimento frontend}
+No desenvolvimento da camada de frontend, o ecossistema React se destaca pela ampla utilização na construção de interfaces web modernas e pela flexibilidade oferecida por sua arquitetura baseada em componentes. O React constitui a base da interface da aplicação, permitindo a construção de elementos reutilizáveis e facilitando a organização do código. Complementando essa estrutura, o TypeScript adiciona mecanismos de tipagem estática que contribuem para a segurança e a manutenção do sistema. Para apoiar o processo de desenvolvimento, o Vite é utilizado como ferramenta de construção da aplicação, oferecendo um ambiente de desenvolvimento ágil e eficiente. 
+Complementando a estrutura base do frontend temos , o Material UI e o Emotion atuando na construção e estilização da interface, fornecendo recursos que favorecem a criação de componentes consistentes e a padronização visual da aplicação. Para o gerenciamento de estado global, o React Redux e o Redux Toolkit oferecem mecanismos que facilitam o compartilhamento e a sincronização de informações entre diferentes componentes. No contexto da navegação, o React Router DOM permite a organização das rotas e das diferentes visualizações do sistema, enquanto o Axios viabiliza a comunicação entre o frontend e os serviços disponibilizados pelo backend. Por fim, o ESLint integra-se ao processo de desenvolvimento auxiliando na padronização do código-fonte e na identificação de problemas que possam comprometer sua qualidade e manutenção.
 
 \subsection{React 19}
-
 O React 19 é uma biblioteca JavaScript voltada à construção de interfaces de usuário baseadas em componentes reutilizáveis. Sua abordagem permite dividir a interface em partes independentes, facilitando a organização do código, a manutenção e a evolução da aplicação. Além disso, o React favorece a criação de interfaces dinâmicas e interativas, adequadas ao desenvolvimento de sistemas modernos.
 
-\subsection{TypeScript}
-
-O TypeScript é uma linguagem que estende o JavaScript por meio da adição de tipagem estática e outros recursos voltados à maior segurança no desenvolvimento. Sua utilização contribui para a detecção antecipada de erros, para a melhor documentação do código e para a maior previsibilidade no comportamento da aplicação. Dessa forma, favorece a manutenção e a escalabilidade de projetos de maior porte.
+\subsection{Typescript}
+O Typescript é uma linguagem que transpila o JavaScript por meio da adição de tipagem estática e outros recursos voltados à maior segurança no desenvolvimento. Sua utilização contribui para a detecção antecipada de erros, para a melhor documentação do código e para a maior previsibilidade no comportamento da aplicação. Dessa forma, favorece a manutenção e a escalabilidade de projetos de maior porte.
 
 \subsection{Vite}
-
 O Vite é uma ferramenta de construção e execução de aplicações frontend que se destaca pela rapidez no ambiente de desenvolvimento e pela simplicidade de configuração. Ele oferece suporte eficiente ao empacotamento do projeto, à atualização instantânea durante a codificação e à preparação da aplicação para produção. Seu uso contribui para tornar o processo de desenvolvimento mais ágil e produtivo.
 
-\subsection{Material UI (MUI)}
-
-O Material UI (MUI) é uma biblioteca de componentes visuais para aplicações React, baseada nos princípios do \textit{Material Design}. Ela oferece um conjunto de elementos de interface prontos, como botões, tabelas, campos de formulário, menus e diálogos, permitindo a construção de interfaces consistentes, responsivas e visualmente padronizadas. Seu uso contribui para acelerar o desenvolvimento e melhorar a usabilidade da aplicação.
+\subsection{Material UI}
+O Material UI (MUI) é uma biblioteca de componentes visuais para aplicações React, baseada nos princípios do Material Design. Ela oferece um conjunto de elementos de interface prontos, como botões, tabelas, campos de formulário, menus e diálogos, permitindo a construção de interfaces consistentes, responsivas e visualmente padronizadas. Seu uso contribui para acelerar o desenvolvimento e melhorar a usabilidade da aplicação.
 
 \subsection{Emotion}
-
 O Emotion é uma biblioteca voltada à estilização de interfaces em aplicações JavaScript e React. Ela permite definir estilos diretamente nos componentes, com flexibilidade para composição, reutilização e manutenção do design da aplicação. Essa abordagem favorece a organização dos estilos e a integração entre lógica e apresentação no desenvolvimento da interface.
 
 \subsection{Redux Toolkit}
-
 O Redux Toolkit é uma ferramenta destinada ao gerenciamento de estado global em aplicações frontend. Sua principal finalidade é simplificar o uso da arquitetura Redux, reduzindo a complexidade de configuração e de manipulação do estado compartilhado entre diferentes partes da aplicação. Dessa forma, contribui para a centralização das informações, para a previsibilidade do fluxo de dados e para a melhor organização do código.
 
 \subsection{React Redux}
-
 O React Redux é a biblioteca responsável por integrar o Redux às aplicações desenvolvidas com React. Ela fornece mecanismos para conectar componentes ao estado global da aplicação e para despachar ações que atualizam os dados compartilhados. Seu uso permite que a interface reaja de forma consistente às mudanças de estado, favorecendo a sincronização entre diferentes componentes.
 
 \subsection{React Router DOM}
-
 O React Router DOM é uma biblioteca utilizada para gerenciar a navegação entre diferentes páginas ou visualizações em aplicações React. Ela possibilita definir rotas, associar componentes a caminhos específicos e controlar a transição entre telas sem a necessidade de recarregamento completo da página. Dessa forma, contribui para a organização da navegação e para uma experiência de uso mais fluida.
 
 \subsection{Axios}
-
 O Axios é uma biblioteca utilizada para realizar requisições HTTP em aplicações JavaScript. No contexto do frontend, sua principal função é possibilitar a comunicação com serviços externos, como APIs responsáveis pelo fornecimento e recebimento de dados. Seu uso facilita o envio de requisições, o tratamento de respostas e o gerenciamento de erros na comunicação entre a interface e o backend.
 
 \subsection{ESLint}
-
 O ESLint é uma ferramenta de análise estática de código voltada à identificação de problemas de sintaxe, inconsistências e más práticas em projetos JavaScript e TypeScript. Sua utilização contribui para a padronização do código-fonte, para a melhoria da legibilidade e para a prevenção de erros durante o desenvolvimento. Assim, auxilia na manutenção da qualidade e da consistência do projeto.
 
-\section{Tecnologias de Controle de Versão}
-
+\subsection{Tecnologias de Controle de Versão}
+Ferramentas de controle de versão desempenham um papel fundamental na organização e no acompanhamento das alterações realizadas ao longo do ciclo de vida de um projeto. Entre as soluções disponíveis, o Git se destaca como um dos sistemas de controle de versão mais utilizado no mundo, permitindo registrar modificações no código-fonte, recuperar versões anteriores e gerenciar diferentes linhas de desenvolvimento de forma distribuída. Sua utilização contribui para a rastreabilidade das mudanças, para a segurança das informações e para a colaboração entre os membros da equipe de desenvolvimento.
+Por sua vez, o GitLab fornece uma plataforma integrada para hospedagem e gerenciamento de repositórios Git. Além de centralizar o armazenamento do código-fonte, a ferramenta disponibiliza recursos voltados ao desenvolvimento colaborativo, como controle de acesso, revisão de código, gerenciamento de atividades e acompanhamento do progresso do projeto. Dessa forma, a combinação entre Git e GitLab possibilita um processo de desenvolvimento mais organizado, favorecendo o controle das alterações, a colaboração entre desenvolvedores e a manutenção contínua do software.
 
 \subsection{Git}
-
 O Git é um sistema de controle de versão distribuído amplamente utilizado no desenvolvimento de software para registrar, organizar e acompanhar as alterações realizadas no código-fonte ao longo do tempo. Por meio dele, torna-se possível manter um histórico detalhado das modificações, recuperar versões anteriores, criar ramificações independentes para desenvolvimento de funcionalidades e integrar mudanças de diferentes colaboradores de forma controlada. Sua utilização contribui para a rastreabilidade das alterações, para a segurança no processo de desenvolvimento e para a manutenção evolutiva do software.
 
 \subsection{GitLab}
+O GitLab é uma plataforma de hospedagem e gerenciamento de repositórios baseada no Git, que oferece recursos voltados ao desenvolvimento colaborativo e à automação de processos. Além de permitir o armazenamento centralizado do código-fonte, a ferramenta disponibiliza mecanismos para controle de acesso, revisão de código, gerenciamento de issues, acompanhamento de atividades e integração com fluxos de integração contínua e entrega contínua. Dessa forma, o GitLab amplia as possibilidades de organização do projeto, de colaboração entre os membros da equipe e de controle do ciclo de desenvolvimento de software.
 
-O GitLab é uma plataforma de hospedagem e gerenciamento de repositórios baseada no Git, que oferece recursos voltados ao desenvolvimento colaborativo e à automação de processos. Além de permitir o armazenamento centralizado do código-fonte, a ferramenta disponibiliza mecanismos para controle de acesso, revisão de código, gerenciamento de \textit{issues}, acompanhamento de atividades e integração com fluxos de integração contínua e entrega contínua. Dessa forma, o GitLab amplia as possibilidades de organização do projeto, de colaboração entre os membros da equipe e de controle do ciclo de desenvolvimento de software.
-
-\section{Tecnologias de Conteinerização e Distribuição}
+\subsection{Tecnologias de Conteinerização e Deploy}
+No âmbito da disponibilização de aplicações, tecnologias de conteinerização e automação de processos desempenham um papel importante na padronização dos ambientes e na redução de atividades manuais durante o ciclo de desenvolvimento. Entre as soluções mais utilizadas, o Docker se destaca por permitir o empacotamento da aplicação e de suas dependências em contêineres, garantindo maior consistência entre os ambientes de desenvolvimento, teste e produção, favorecendo a portabilidade, a reprodutibilidade e a escalabilidade das aplicações. Em conjunto, o GitLab CI/CD complementa essa abordagem ao fornecer mecanismos para automatizar atividades relacionadas à integração contínua e à entrega contínua, permitindo a execução de tarefas como compilação, testes, validações e implantação da aplicação sempre que alterações são realizadas no repositório. Dessa forma, a integração entre Docker e GitLab CI/CD possibilita a construção de um processo de entrega mais confiável, padronizado e eficiente, reduzindo intervenções manuais e favorecendo a disponibilização contínua de novas versões do software.
 
 \subsection{Docker}
-
 O Docker é uma plataforma voltada à conteinerização de aplicações, permitindo empacotar o software e suas dependências em unidades isoladas de execução, denominadas contêineres. No contexto de integração contínua e entrega contínua, seu uso contribui para a padronização dos ambientes de desenvolvimento, teste e implantação, reduzindo inconsistências entre diferentes etapas do ciclo de vida do software. Além disso, o Docker favorece a reprodutibilidade, a portabilidade e a escalabilidade da aplicação, tornando o processo de construção, validação e disponibilização de novas versões mais previsível e controlado.
 
 \subsection{GitLab CI/CD}
-O GitLab CI/CD corresponde ao conjunto de mecanismos de automação disponibilizados pela plataforma GitLab para apoiar práticas de integração contínua e entrega contínua. Por meio dessa abordagem, é possível definir fluxos automatizados para executar etapas como compilação, testes, validações e processos de implantação sempre que alterações são realizadas no repositório. Sua utilização contribui para reduzir atividades manuais, aumentar a confiabilidade do processo de desenvolvimento e permitir que a equipe acompanhe de forma mais sistemática a qualidade e a evolução do software. Dessa forma, o GitLab Actions fortalece a automação do ciclo de desenvolvimento e favorece a disponibilização mais rápida e consistente de novas versões da aplicação.
+O GitLab CI/CD corresponde ao conjunto de mecanismos de automação disponibilizados pela plataforma GitLab para apoiar práticas de integração contínua e entrega contínua. Por meio dessa abordagem, é possível definir fluxos automatizados para executar etapas como compilação, testes, validações e processos de implantação sempre que alterações são realizadas no repositório. Sua utilização contribui para reduzir atividades manuais, aumentar a confiabilidade do processo de desenvolvimento e permitir que a equipe acompanhe de forma mais sistemática a qualidade e a evolução do software. Dessa forma, o GitLab CI/CD fortalece a automação do ciclo de desenvolvimento e favorece a disponibilização mais rápida e consistente de novas versões da aplicação.
