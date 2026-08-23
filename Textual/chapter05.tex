@@ -9,8 +9,6 @@ Ao longo do desenvolvimento, a proposta passou por mudanças em sua organizaçã
 
 O levantamento dos requisitos do sistema foi realizado a partir de duas frentes diferentes, a primeira através de diálogo com a gestora do PAA no assentamento para entender seu dia-a-dia e como funcionava o diálogo com os agricultores e a segunda da análise baseado em planilhas no excel que mostrava o funcionamento da gestão do programa no Assentamento PDS Osvaldo de Oliveira. Inicialmente, o foco era entender como as informações das chamadas públicas eram organizadas, quais atividades eram realizadas durante a execução dos editais e quais dificuldades estavam presentes no processo de acompanhamento. Observou-se que o gerenciamento do edital envolve diferentes informações, como quais famílias agricultoras estão participando, quais produtos foram selecionados, quantas entregas foram realizadas, quais destinos receberão os alimentos e quais são os valores a receber por agricultor, além das informações para o gerenciamento do edital, era necessário gerar documentos que comprovem as entregas.
 
-\subsection{Casos de uso do sistema}
-
 Os casos de uso do sistema foram definidos a partir das principais ações realizadas durante a gestão de uma chamada pública do PAA e para que ficasse coerente com o levantamento de requisitos. Como objetivo do sistema é organizar informações sobre editais, famílias, produtos, ciclos, destinos e entregas, foi necessário identificar quais pessoas interagem com a plataforma e quais atividades cada uma delas precisa realizar, que se resume em três atores principais, o administrador, o coordenador e o agricultor.
 
 O administrador é o usuário que tem máximo acesso ao sistema, podendo criar coletivos, produtos, editais, aprovar usuários e modificar informações livremente no sistema. O segundo ator, o coordenador, é responsável por acompanhar a execução do edital, aprovar usuários do mesmo coletivo, cadastrar famílias, organizar produtos, criar editais, criar ciclos de entrega, registrar informações e acompanhar o andamento da chamada pública. Por fim, temos o agricultor que está relacionado ao acompanhamento das informações referentes à sua participação, como produtos previstos, entregas realizadas e valores a receber.
@@ -145,7 +143,6 @@ Para os testes unitários, foram utilizadas as bibliotecas JUnit e Mockito. O JU
 
 Na documentação da API, foi utilizado o OpenAPI/Swagger, por ser uma ferramenta open-source que gera uma interface interativa para visualização e teste dos endpoints da aplicação. Com isso, torna-se possível consultar os recursos disponíveis, verificar os parâmetros esperados e testar requisições diretamente pela própria aplicação, sem a necessidade inicial de ferramentas externas. 
 
-\subsection{Desafios de implementação do backend}
 
 Com o objetivo de apresentar os principais desafios técnicos enfrentados durante o desenvolvimento do backend, esta seção analisa implementações que são complexas na  modelagem, integração e controle das entidades do sistema. 
 
