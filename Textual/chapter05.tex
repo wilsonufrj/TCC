@@ -78,7 +78,7 @@ Administrador & Manter o sistema & Permite realizar ajustes, correções e evolu
 \end{longtable}
 \endgroup
 
-\section{Modelagem do domínio e estrutura dos dados}
+\section{Modelagem do Domínio e Estrutura dos Dados}
 
 A modelagem do domínio foi construída a fim de atender as demandas necessárias para o acompanhamento do edital. O edital foi definido como uma das entidades centrais do sistema, pois representa a chamada pública que será gerenciada. Diretamente associado ao edital nós temos o plano original, entidade que contém os produtos previstos, os destinos das entregas e as famílias participantes. 
 
@@ -108,7 +108,7 @@ A Figura~\ref{fig:modelo-dominio} apresenta uma proposta de modelo de domínio s
 \end{figure}
 
 
-\section{Arquitetura geral do sistema}
+\section{Arquitetura Geral do Sistema}
 
 A arquitetura geral do sistema foi pensada para organizar o desenvolvimento em partes bem definidas, separando a interface utilizada pelos usuários das regras de negócio e do armazenamento das informações. Como o sistema precisa lidar com módulos e cada um com sua respectiva função, a aplicação foi estruturada para permitir que cada parte evolua de forma mais organizada, sem que uma alteração em uma funcionalidade comprometa todo o sistema.
 
@@ -120,9 +120,9 @@ A estrutura geral é composta por duas partes principais: o frontend e o backend
 
 A intenção de manter o frontend e o backend separados era de dar independência ao desenvolvimento de cada um. Mesmo que um complete o outro, funcionalidades como filtros podem ser aplicadas ao backend sem que seja necessário derrubar toda a aplicação.
 
-\section{Implementação do backend}
+\section{Implementação do Backend}
 
-Seguindo princípios de arquitetura limpa, a estrutura de pastas do backend foi dividida em application, domain, infrastructure e web. A application é responsável pelas interfaces dos services que serão implementados. O domain representa todas as entidades do sistema que foram explicadas em seções anteriores, assim como DTOs e as interfaces que são implementadas em tempo de execução para o armazenamento no banco de dados. A infrastructure é responsável por armazenar configurações necessárias, a implementação dos services que dão a alma para o sistema e funções utilitárias para o sistema. A pasta web é responsável por armazenar os controllers que são o ponto de entrada das requisições, sejam elas vindas do frontend ou de alguma ferramenta que realiza requisições HTTP. Na Figura~\ref{fig:directory-structure} temos a ilustração da organização de diretórios do projeto.
+Seguindo princípios de arquitetura limpa, a estrutura de pastas do backend foi dividida em application, domain, infrastructure e web. A application é responsável pelas interfaces dos services que serão implementados. O domain representa todas as entidades do sistema que foram explicadas em seções anteriores, assim como DTOs e as interfaces que são implementadas em tempo de execução para o armazenamento no banco de dados. A infrastructure é responsável por armazenar configurações necessárias, a implementação dos services que dão a alma para o sistema e funções utilitárias para o sistema. A pasta web é responsável por armazenar os controllers que são o ponto de entrada das requisições, sejam elas vindas do frontend ou de alguma ferramenta que realiza requisições HTTP. Na Figura~\ref{fig:directory-structure} tem-se a ilustração da organização de diretórios do projeto.
 
 \begin{figure}[H]
     \centering
@@ -451,7 +451,7 @@ Com a autenticação realizada, os dados completos do usuário são recuperados 
 Além do token de acesso, o método chama a função responsável pelo processamento do refresh token. Para isso, utiliza o identificador único do usuário autenticado. Esse segundo token permite renovar a autenticação quando o JWT principal expirar, evitando que o usuário precise informar novamente suas credenciais durante uma sessão válida.
 
 
-\section{Implementação do frontend}
+\section{Implementação do Frontend}
 
 O frontend foi pensado para tornar o sistema intuitivo e facilitar o uso pelos diferentes perfis de usuários. No caso do coordenador e do administrador, a interface busca auxiliar na administração dos editais do PAA. Já para o agricultor, o objetivo é permitir o acompanhamento claro do andamento de sua participação no edital.
 
