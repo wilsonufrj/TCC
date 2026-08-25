@@ -2,7 +2,7 @@
 \label{chap5}
 
 O desenvolvimento do projeto teve início no segundo semestre de 2024, no âmbito da disciplina Software Livre e Metodologias Participativas. Após o término da disciplina, o projeto passou a integrar as atividades do projeto de extensão Tecnologia da Informação, Democracia e Movimentos Sociais (TICDEMOS), vinculado ao SOLTEC/UFRJ. Desde o início, a proposta contou com o acompanhamento da antiga gestora do PAA no PDS Osvaldo de Oliveira, que contribuiu com sua experiência para a modelagem do sistema e para a definição dos principais casos de uso.
-Ao longo do desenvolvimento, a proposta passou por mudanças em sua organização técnica e funcional. Inicialmente, o sistema estava voltado para um único assentamento e com criação de uma base mínima que permitisse cadastrar usuários, famílias, produtos, ciclos, destinos e editais. Em 2025, a proposta foi apresentada à equipe da Companhia Nacional de Abastecimento do Rio de Janeiro (CONAB-RJ). Após a reunião, vimos que além do cadastro das informações essenciais do edital deveríamos contemplar o cadastro de coletivos, um painel de acompanhamento que mostrasse de forma clara o andamento do projeto e a geração de relatórios que apoiam a comprovação das entregas, visualizando valores a receber pelas famílias agricultoras, além de, facilitar a consolidação dos dados de entregas pelo coordenador.
+Ao longo do desenvolvimento, a proposta passou por mudanças em sua organização técnica e funcional. Inicialmente, o sistema estava voltado para um único assentamento e para a criação de uma base mínima que permitisse cadastrar usuários, famílias, produtos, ciclos, destinos e editais. Em 2025, a proposta foi apresentada à equipe da Companhia Nacional de Abastecimento do Rio de Janeiro (CONAB-RJ). A reunião evidenciou a necessidade de contemplar, além do cadastro das informações essenciais do edital, o cadastro de coletivos, um painel que apresentasse com clareza o andamento do projeto e a geração de relatórios que apoiassem a comprovação das entregas, a visualização dos valores a receber pelas famílias agricultoras e a consolidação dos dados de entrega pelo coordenador.
 
 
 \section{Requisitos do Sistema}
@@ -11,7 +11,7 @@ O levantamento dos requisitos do sistema foi realizado a partir de duas frentes 
 
 Os casos de uso do sistema foram definidos a partir das principais ações realizadas durante a gestão de uma chamada pública do PAA e para que ficasse coerente com o levantamento de requisitos. Como objetivo do sistema é organizar informações sobre editais, famílias, produtos, ciclos, destinos e entregas, foi necessário identificar quais pessoas interagem com a plataforma e quais atividades cada uma delas precisa realizar, que se resume em três atores principais, o administrador, o coordenador e o agricultor.
 
-O administrador é o usuário que tem máximo acesso ao sistema, podendo criar coletivos, produtos, editais, aprovar usuários e modificar informações livremente no sistema. O segundo ator, o coordenador, é responsável por acompanhar a execução do edital, aprovar usuários do mesmo coletivo, cadastrar famílias, organizar produtos, criar editais, criar ciclos de entrega, registrar informações e acompanhar o andamento da chamada pública. Por fim, temos o agricultor que está relacionado ao acompanhamento das informações referentes à sua participação, como produtos previstos, entregas realizadas e valores a receber.
+O administrador é o usuário que tem máximo acesso ao sistema, podendo criar coletivos, produtos, editais, aprovar usuários e modificar informações livremente no sistema. O segundo ator, o coordenador, é responsável por acompanhar a execução do edital, aprovar usuários do mesmo coletivo, cadastrar famílias, organizar produtos, criar editais, criar ciclos de entrega, registrar informações e acompanhar o andamento da chamada pública. Por fim, o agricultor acompanha as informações referentes à sua participação, como produtos previstos, entregas realizadas e valores a receber.
 
 O primeiro caso de uso é o cadastro de usuários. Por meio dessa funcionalidade, uma pessoa interessada em acessar o sistema informa seus dados e solicita a criação de uma conta. Após esse cadastro, o usuário não recebe acesso imediato às funcionalidades internas, pois sua entrada depende da aprovação do coordenador/administrador.
 
@@ -80,11 +80,11 @@ Administrador & Manter o sistema & Permite realizar ajustes, correções e evolu
 
 \section{Modelagem do Domínio e Estrutura dos Dados}
 
-A modelagem do domínio foi construída a fim de atender as demandas necessárias para o acompanhamento do edital. O edital foi definido como uma das entidades centrais do sistema, pois representa a chamada pública que será gerenciada. Diretamente associado ao edital nós temos o plano original, entidade que contém os produtos previstos, os destinos das entregas e as famílias participantes. 
+A modelagem do domínio foi construída a fim de atender às demandas necessárias para o acompanhamento do edital. O edital foi definido como uma das entidades centrais do sistema, pois representa a chamada pública que será gerenciada. Diretamente associado ao edital está o plano original, entidade que contém os produtos previstos, os destinos das entregas e as famílias participantes.
 
 O plano original é uma entidade que formaliza o início do edital, com informações essenciais como quais famílias irão participar, quais produtos e quais serão os destinos dos alimentos.
 
-As famílias representam um grupo de usuários agricultores que participam do PAA. Dentro dos usuários pertencentes a família temos a entidade representante para sinalizar qual dos usuários será o responsável pelos registros nos relatórios gerados. Essa relação é importante porque as entregas e os valores a receber precisam ser vinculados corretamente ao responsável da família pela produção. 
+As famílias representam um grupo de usuários agricultores que participam do PAA. Entre os usuários pertencentes a uma família, a entidade representante sinaliza qual deles será responsável pelos registros nos relatórios gerados. Essa relação é importante porque as entregas e os valores a receber precisam ser vinculados corretamente ao responsável da família pela produção.
 
 A entidade produto representa cada alimento que faz parte da chamada pública. No sistema, os produtos podem ser cadastrados independentemente como valores globais no sistema e podem ser associados ao edital com informações como valor unitário e quantidade prevista. Essa associação permite diferenciar os produtos dos diversos editais, controlar o que foi planejado e comparar posteriormente com o que foi efetivamente entregue.
 
@@ -290,7 +290,7 @@ O mesmo procedimento é aplicado aos destinos cadastrados no plano original. Par
 
 Outro ponto tratado pelo método é a definição automática do status inicial do ciclo. Caso a data atual esteja dentro do período informado, o ciclo é criado com o status ABERTO, caso contrário, permanece como AGUARDANDO. Antes do armazenamento, as datas são validadas, e também são definidos o nome, a situação de aprovação da coordenação, o edital relacionado e o conjunto de famílias participantes.
 
-Também podemos  destacar a geração automática dos termos de recebimento. Essa funcionalidade utiliza os dados cadastrados durante a execução do ciclo para preencher um documento padronizado, reduzindo a necessidade de elaboração manual. No trecho de código apresentado abaixo, é possível observar a implementação responsável por gerar esse documento.
+Destaca-se também a geração automática dos termos de recebimento. Essa funcionalidade utiliza os dados cadastrados durante a execução do ciclo para preencher um documento padronizado, reduzindo a necessidade de elaboração manual. No trecho de código apresentado abaixo, é possível observar a implementação responsável por gerar esse documento.
 
 \begin{lstlisting}[language=Java, caption={Serviço geração do termo de recebimento}, label={lst:servico_gerar_termo_recebimento}]
 
@@ -465,7 +465,7 @@ A comunicação com o backend é feita por meio da biblioteca Axios, responsáve
 
 \subsection{Telas implementadas}
 
-Abaixo serão apresentadas as telas do sistema, juntamente com as descrição de cada uma. Na figura~\ref{fig:login} temos a primeira tela, a de login, onde os usuários já cadastrados podem inserir suas credenciais e realizar o acesso e os interessados no sistema podem requisitar o acesso através do botão de criar conta.
+A seguir, são apresentadas as telas do sistema, juntamente com a descrição de cada uma. A Figura~\ref{fig:login} mostra a primeira tela, a de login, na qual os usuários já cadastrados podem inserir suas credenciais e acessar o sistema, enquanto os interessados podem solicitar acesso por meio do botão de criação de conta.
 
 
 \begin{figure}[H]
@@ -475,7 +475,7 @@ Abaixo serão apresentadas as telas do sistema, juntamente com as descrição de
     \label{fig:login}
 \end{figure}
 
-Após o login o usuário segue para a seleção do edital que, no caso do coordenador, deseja verificar o andamento ou realizar o gerenciamento. Na tela~\ref{fig:editais} temos todos os editais disponíveis para a seleção. Vale ressaltar que o coordenador só pode acompanhar o andamento dos editais que são do seu coletivo. Um filtro é realizado no backend para que os dados que apareçam na interface sigam essa regra. O administrador do sistema pode ver todos os editais existentes, e o agricultor tem acesso semelhante ao do coordenador, podendo ver somente os editais dos quais participa. Nesta tela também podemos ver um botão de criar novos editais, permitindo que o coordenador ou o administrador inicie o gerenciamento de uma nova chamada pública.
+Após o login, o usuário segue para a seleção do edital cujo andamento deseja verificar ou cujo gerenciamento pretende realizar. A tela apresentada na Figura~\ref{fig:editais} exibe todos os editais disponíveis para seleção. Vale ressaltar que o coordenador só pode acompanhar o andamento dos editais de seu coletivo. Um filtro é realizado no backend para que os dados exibidos na interface sigam essa regra. O administrador do sistema pode visualizar todos os editais existentes, enquanto o agricultor possui acesso semelhante ao do coordenador e pode visualizar somente os editais dos quais participa. A tela também apresenta um botão para a criação de novos editais, permitindo que o coordenador ou o administrador inicie o gerenciamento de uma nova chamada pública.
 
 \begin{figure}[H]
     \centering
@@ -739,7 +739,7 @@ const calculaEntregaFaltante = (
     }
 \end{lstlisting}
 
-Na função apresentada, vemos que o processo utiliza dados do ciclo atual e dos ciclos anteriores para comparar a quantidade planejada no plano original com o total já entregue até o período selecionado.
+Na função apresentada, observa-se que o processo utiliza dados do ciclo atual e dos ciclos anteriores para comparar a quantidade planejada no plano original com o total já entregue até o período selecionado.
 
 A função recebe como parâmetros a família responsável pela entrega e o item cujo saldo será calculado. Inicialmente, é criada uma lista para armazenar as entregas relacionadas à família. Em seguida, o ciclo atual é localizado por meio do identificador selecionado na interface. Caso nenhum ciclo correspondente seja encontrado, a função retorna o valor zero, evitando a execução do cálculo com dados inexistentes.
 
@@ -792,7 +792,7 @@ const timeline = useMemo<TimelineData>(() => {
   }, [ciclos, editalSelected?.dataInicio, editalSelected?.dataFim]);
 \end{lstlisting}
 
-Analisando o código percebemos que a data de início do edital é utilizada como ponto inicial da linha temporal. Também é recuperada a data final prevista para o edital. Ambas são normalizadas para o início do dia por meio da biblioteca dayjs, evitando diferenças causadas por horários durante as comparações.
+A análise do código mostra que a data de início do edital é utilizada como ponto inicial da linha temporal. Também é recuperada a data final prevista para o edital. Ambas são normalizadas para o início do dia por meio da biblioteca dayjs, evitando diferenças causadas por horários durante as comparações.
 
 Em seguida, o código percorre todos os ciclos para localizar a data de término mais recente. Antes de utilizar cada data, a implementação verifica se ela é válida. Datas ausentes ou inválidas são desconsideradas, impedindo que comprometam a construção da série temporal. Ao encontrar um ciclo com término posterior ao último registrado, a variável lastCycleEnd é atualizada.
 
@@ -866,3 +866,13 @@ Durante o desenvolvimento do sistema, foi utilizado o Git como ferramenta de con
 Com o objetivo de apoiar a integração contínua de novas funcionalidades e padronizar o processo de construção da aplicação, foi configurado, em cada projeto, um arquivo chamado \texttt{.gitlab-ci.yml}. Esse arquivo é responsável por definir as etapas executadas automaticamente pelo GitLab CI/CD, como a verificação do código, acionamento de testes automatizados, a execução do build e a geração de uma nova imagem Docker. No backend, esse processo utiliza o Maven para executar as etapas de teste e construção da aplicação. No frontend, o processo utiliza o Vite para gerar a versão de produção da interface. Neste primeiro momento a aplicação possui somente testes automatizados para pontos essenciais e comportamentos críticos do sistema. Após a criação da imagem, ela é publicada no Docker Hub, possibilitando que a versão mais recente da aplicação esteja disponível para implantação no ambiente de homologação \cite{dockerhub2026}.
 
 O ambiente de homologação da aplicação encontra-se em uma VPS hospedada na Hostinger. Nesse ambiente, o deploy ainda é realizado de forma manual. Para isso, existe um script no servidor responsável por remover as imagens locais dos containers, baixar as versões mais recentes publicadas no Docker Hub e executar novamente o Docker Compose, fazendo com que os serviços da aplicação sejam atualizados e disponibilizados online.
+
+\section{Resultados Preliminares}
+
+Atualmente, o sistema encontra-se em fase de homologação. Essa etapa tem como objetivo validar, junto aos usuários envolvidos no processo de gestão do PAA e ao Assentamento PDS Osvaldo de Oliveira, se as funcionalidades implementadas atendem às necessidades identificadas durante o levantamento de requisitos e se o fluxo do sistema corresponde à realidade operacional do programa.
+
+A versão em homologação contempla as principais funcionalidades necessárias para a criação e o acompanhamento de um edital, permitindo organizar informações que antes eram controladas de forma manual, principalmente por meio de planilhas. Entre essas funcionalidades, destacam-se o cadastro de usuários, a aprovação de acesso ao sistema, o cadastro de famílias, a criação de editais e a definição dos perfis de acesso dos participantes.
+
+Com isso, é possível observar que o sistema propõe uma nova forma de olhar para a gestão do PAA. Ao centralizar as informações em uma plataforma web, o acompanhamento dos editais tende a se tornar mais objetivo, claro e transparente. Além disso, a ferramenta reduz a dependência de controles manuais e facilita a consulta das informações pelos diferentes usuários envolvidos no processo.
+
+Dessa forma, mesmo ainda estando em homologação, o sistema já demonstra potencial para contribuir com a organização da gestão do PAA no assentamento. A validação com os usuários será fundamental para identificar ajustes necessários, melhorar a experiência de uso e garantir que a ferramenta esteja adequada às demandas reais da comunidade antes de sua implantação definitiva.
