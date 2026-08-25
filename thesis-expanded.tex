@@ -357,42 +357,7 @@ O registro das entregas realizadas representa uma das funcionalidades mais impor
 Também foi definido o caso de uso de acompanhamento do edital por meio de um dashboard. Esse dashboard tem como objetivo apresentar de forma visual e organizada o andamento da chamada pública, indicando informações como produtos entregues, valores acumulados, famílias participantes e ciclos já realizados.
 
 
-A Tabela~\ref{tab:casos-uso-sistema} apresenta uma síntese dos casos de uso identificados para o sistema.
-
-\begin{table}[H]
-\centering
-\caption{Principais casos de uso do sistema}
-\label{tab:casos-uso-sistema}
-\begin{tabular}{|p{4cm}|p{5cm}|p{6cm}|}
-\hline
-\textbf{Ator} & \textbf{Caso de uso} & \textbf{Descrição} \\ \hline
-
-Agricultor & Solicitar cadastro & Permite que uma pessoa solicite acesso ao sistema. \\ \hline
-
-Coordenador/\newline Administrador & Aprovar usuário & Permite aprovar ou rejeitar usuários cadastrados na plataforma. \\ \hline
-
-Coordenador/\newline Administrador & Gerenciar famílias & Permite cadastrar, editar e organizar as famílias agricultoras participantes. \\ \hline
-
-Coordenador/\newline Administrador  & Criar edital & Permite cadastrar uma chamada pública do PAA e suas informações principais. \\ \hline
-
-Administrador & Gerenciar produtos & Permite cadastrar os produtos previstos no edital \\ \hline
-
-Administrador & Gerenciar destinos & Permite cadastrar as organizações e equipamentos que receberão os alimentos. \\ \hline
-
-Coordenador/\newline Administrador & Criar ciclos de entrega & Permite organizar o edital em períodos de entrega. \\ \hline
-
-Coordenador/\newline Administrador & Registrar entrega & Permite registrar os produtos entregues pelas famílias em cada ciclo. \\ \hline
-
-Coordenador/\newline Administrador & Acompanhar dashboard & Permite visualizar o andamento do edital por meio de indicadores. \\ \hline
-
-Coordenador/\newline Administrador & Gerar relatórios & Permite gerar documentos com informações sobre entregas, produtos e valores. \\ \hline
-
-Agricultor & Consultar informações da participação & Permite acompanhar produtos entregues, quantidades registradas e valores a receber. \\ \hline
-
-Administrador & Manter o sistema & Permite realizar ajustes, correções e evolução da plataforma. \\ \hline
-
-\end{tabular}
-\end{table}
+Os casos de uso e as associações entre os atores e as funcionalidades são representados pelos diagramas UML do Apêndice~\ref{apendice-casos-uso}. Para facilitar a leitura, os casos foram organizados em quatro áreas funcionais: acesso ao sistema (Figura~\ref{fig:uc-acesso}), configuração do edital (Figura~\ref{fig:uc-configuracao}), execução e acompanhamento (Figura~\ref{fig:uc-execucao}) e administração da plataforma (Figura~\ref{fig:uc-administracao}).
 
 \section{Modelagem do domínio e estrutura dos dados}
 
@@ -680,4 +645,5 @@ Por fim, conclui-se que este trabalho contribui tanto para a organização técn
   \bibliographystyle{IEEEtranM}
   \bibliography{thesis}
   \appendix
+  \input{Pos-textual/appenA}
 \end{document}

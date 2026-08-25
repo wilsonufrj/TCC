@@ -4,6 +4,21 @@
 O desenvolvimento do projeto teve início no segundo semestre de 2024, no âmbito da disciplina Software Livre e Metodologias Participativas. Após o término da disciplina, o projeto passou a integrar as atividades do projeto de extensão Tecnologia da Informação, Democracia e Movimentos Sociais (TICDEMOS), vinculado ao SOLTEC/UFRJ. Desde o início, a proposta contou com o acompanhamento da antiga gestora do PAA no PDS Osvaldo de Oliveira, que contribuiu com sua experiência para a modelagem do sistema e para a definição dos principais casos de uso.
 Ao longo do desenvolvimento, a proposta passou por mudanças em sua organização técnica e funcional. Inicialmente, o sistema estava voltado para um único assentamento e para a criação de uma base mínima que permitisse cadastrar usuários, famílias, produtos, ciclos, destinos e editais. Em 2025, a proposta foi apresentada à equipe da Companhia Nacional de Abastecimento do Rio de Janeiro (CONAB-RJ). A reunião evidenciou a necessidade de contemplar, além do cadastro das informações essenciais do edital, o cadastro de coletivos, um painel que apresentasse com clareza o andamento do projeto e a geração de relatórios que apoiassem a comprovação das entregas, a visualização dos valores a receber pelas famílias agricultoras e a consolidação dos dados de entrega pelo coordenador.
 
+\section{Trabalhos Relacionados}
+
+Os trabalhos relacionados ao sistema Biribá foram analisados a partir de duas perspectivas. A primeira compreende as plataformas governamentais utilizadas na execução formal do Programa de Aquisição de Alimentos. A segunda envolve trabalhos acadêmicos que investigaram ou desenvolveram sistemas de informação para apoiar associações e cooperativas na gestão da modalidade Compra com Doação Simultânea. Essa separação é importante porque o Biribá atua principalmente na organização interna do coletivo, apoiando o planejamento e o acompanhamento das entregas antes e durante o registro formal das informações exigidas pelos órgãos públicos.
+
+Cirino et al. investigaram a utilização de sistemas de informação gerencial por organizações sociais responsáveis por projetos do PAA na modalidade Doação Simultânea em Minas Gerais. Os resultados mostraram que 64\% das organizações analisadas não utilizavam um software específico que reunisse as diferentes etapas da gestão do programa, embora 75\% dos entrevistados reconhecessem a necessidade de uma ferramenta com essa finalidade. Entre as funcionalidades consideradas importantes estavam o acompanhamento das entregas realizadas pelos agricultores, o controle financeiro, o registro das doações destinadas às entidades consumidoras e a geração automática de relatórios \cite{cirino2016sistema}. Em outro estudo, Cirino e Silva identificaram que a utilização de um Sistema de Informação Gerencial e a realização do planejamento da produção junto aos agricultores aumentavam a probabilidade de os projetos do PAA-DS serem concluídos dentro do prazo estabelecido \cite{cirino2017prazo}. Esses resultados demonstram que a informatização não possui apenas uma função de armazenamento, mas pode contribuir diretamente para o planejamento e para o controle da execução do programa.
+
+Entre os sistemas governamentais relacionados encontra-se o Sistema de Informação e Gestão do Programa de Aquisição de Alimentos (SisPAA). A ferramenta é utilizada na execução do programa por meio de Termo de Adesão e permite registrar informações relacionadas aos beneficiários fornecedores, produtos, unidades recebedoras, aquisições, destinação dos alimentos e pagamentos \cite{mds2025adesaoPAA,mds2015sispaa}. Seu principal objetivo está relacionado à gestão institucional do programa e ao acompanhamento das metas definidas pelos órgãos executores. A documentação consultada apresenta como usuários principais os estados, o Distrito Federal e os municípios participantes do PAA. Dessa forma, embora o SisPAA possua funcionalidades relacionadas à aquisição e à distribuição de alimentos, seu escopo está direcionado ao registro oficial das informações e à relação entre os entes públicos e o Governo Federal.
+
+Outro sistema relacionado é o PAANet, desenvolvido pela Companhia Nacional de Abastecimento. A ferramenta permite que organizações fornecedoras preencham propostas de participação e registrem as entregas realizadas nas modalidades Compra com Doação Simultânea e Apoio à Formação de Estoques. As informações podem ser transmitidas para a Superintendência Regional da Conab por meio de uma conexão segura \cite{conabPaanet}. O PAANet atende a uma etapa essencial da execução oficial do PAA, pois possibilita o envio das propostas e dos dados das entregas. Entretanto, sua utilização está concentrada no preenchimento e na transmissão das informações exigidas pela Conab. Além disso, trata-se de uma aplicação que precisa ser instalada no computador e que depende de um ambiente Java específico para sua execução.
+
+No campo acadêmico, o trabalho que apresenta maior proximidade com o Biribá é o PRESCONPAA, desenvolvido por Resende. O sistema foi construído com tecnologias de código aberto e teve como objetivo apoiar associações de agricultores familiares na prestação de contas do PAA e na contabilização da produção de cada associado de acordo com os recursos financeiros disponíveis. O desenvolvimento utilizou pesquisa-ação e uma abordagem ágil, permitindo a participação dos usuários durante a construção da solução. Após sua implantação, observou-se que os dados armazenados também poderiam ser utilizados para o planejamento, o controle da produção e a comercialização dos agricultores participantes do programa \cite{resende2013presconpaa}.
+
+O PRESCONPAA aproxima-se do Biribá por partir de uma necessidade concreta de uma organização de agricultores e por adotar tecnologias abertas e a participação dos usuários durante o desenvolvimento. Entretanto, o Biribá apresenta um recorte funcional e arquitetural diferente. A aplicação desenvolvida neste trabalho organiza o plano original do edital, os produtos previstos por família, a distribuição dos alimentos entre os destinos e os diferentes ciclos de entrega. O sistema também diferencia os acessos dos administradores, coordenadores e agricultores, gera documentos comprobatórios e apresenta, por meio de um painel, a relação entre as quantidades planejadas e entregues, bem como os valores a receber por cada família.
+
+A comparação entre as ferramentas mostra que o Biribá não busca substituir o SisPAA ou o PAANet, pois essas plataformas atendem às etapas oficiais de execução e prestação de informações aos órgãos governamentais. A proposta é complementar esse processo por meio de uma ferramenta voltada à organização cotidiana do coletivo. O sistema permite que as informações sejam acompanhadas desde a elaboração do plano original até a realização das entregas, mantendo os agricultores e a coordenação informados sobre o andamento do edital. Entre os trabalhos consultados, não foi identificada uma solução que reunisse esse conjunto de funcionalidades em uma plataforma web de código aberto, construída de forma participativa e adaptada ao fluxo de trabalho do Assentamento PDS Osvaldo de Oliveira.
 
 \section{Requisitos do Sistema}
 
@@ -28,55 +43,7 @@ O registro das entregas realizadas representa uma das funcionalidades mais impor
 
 Também foi definido o caso de uso de acompanhamento do edital por meio de um dashboard. Esse dashboard tem como objetivo apresentar de forma visual e organizada o andamento da chamada pública, indicando informações como produtos entregues, valores acumulados, famílias participantes e ciclos já realizados.
 
-A Tabela~\ref{tab:casos-uso-sistema} apresenta uma síntese dos casos de uso identificados para o sistema.
-\begingroup
-\renewcommand{\baselinestretch}{1}\small\selectfont
-\renewcommand{\arraystretch}{1.1}
-\begin{longtable}{|p{3.2cm}|p{4.2cm}|p{6.1cm}|}
-\caption{Principais casos de uso do sistema}
-\label{tab:casos-uso-sistema} \\
-\hline
-\textbf{Ator} & \textbf{Caso de uso} & \textbf{Descrição} \\ \hline
-\endfirsthead
-
-\multicolumn{3}{c}{\tablename\ \thetable{} -- continuação} \\
-\hline
-\textbf{Ator} & \textbf{Caso de uso} & \textbf{Descrição} \\ \hline
-\endhead
-
-\hline
-\multicolumn{3}{r}{Continua na próxima página.} \\
-\endfoot
-
-\hline
-\endlastfoot
-
-Agricultor & Solicitar cadastro & Permite que uma pessoa solicite acesso ao sistema. \\ \hline
-
-Coordenador/\newline Administrador & Aprovar usuário & Permite aprovar ou rejeitar usuários cadastrados na plataforma. \\ \hline
-
-Coordenador/\newline Administrador & Gerenciar famílias & Permite cadastrar, editar e organizar as famílias agricultoras participantes. \\ \hline
-
-Coordenador/\newline Administrador  & Criar edital & Permite cadastrar uma chamada pública do PAA e suas informações principais. \\ \hline
-
-Administrador & Gerenciar produtos & Permite cadastrar os produtos previstos no edital. \\ \hline
-
-Administrador & Gerenciar destinos & Permite cadastrar as organizações e equipamentos que receberão os alimentos. \\ \hline
-
-Coordenador/\newline Administrador & Criar ciclos de entrega & Permite organizar o edital em períodos de entrega. \\ \hline
-
-Coordenador/\newline Administrador & Registrar entrega & Permite registrar os produtos entregues pelas famílias em cada ciclo. \\ \hline
-
-Coordenador/\newline Administrador & Acompanhar dashboard & Permite visualizar o andamento do edital por meio de indicadores. \\ \hline
-
-Coordenador/\newline Administrador & Gerar relatórios & Permite gerar documentos com informações sobre entregas, produtos e valores. \\ \hline
-
-Agricultor & Consultar informações da participação & Permite acompanhar produtos entregues, quantidades registradas e valores a receber. \\ \hline
-
-Administrador & Manter o sistema & Permite realizar ajustes, correções e evolução da plataforma. \\ \hline
-
-\end{longtable}
-\endgroup
+Os casos de uso e as associações entre os atores e as funcionalidades são representados pelos diagramas UML do Apêndice~\ref{apendice-casos-uso}. Para facilitar a leitura, os casos foram organizados em quatro áreas funcionais: acesso ao sistema (Figura~\ref{fig:uc-acesso}), configuração do edital (Figura~\ref{fig:uc-configuracao}), execução e acompanhamento (Figura~\ref{fig:uc-execucao}) e administração da plataforma (Figura~\ref{fig:uc-administracao}).
 
 \section{Modelagem do Domínio e Estrutura dos Dados}
 
@@ -463,8 +430,6 @@ Além da biblioteca de design, o frontend utiliza outras ferramentas importantes
 
 A comunicação com o backend é feita por meio da biblioteca Axios, responsável por realizar requisições HTTP para a API do sistema. Também são utilizadas bibliotecas auxiliares para formatação e processamento de datas, contribuindo para a apresentação adequada das informações ao usuário. O Vite foi utilizado como ferramenta de desenvolvimento e construção do frontend, facilitando a execução local da aplicação e a geração dos arquivos de produção. Além disso, o ESLint foi utilizado para auxiliar na padronização do código e na identificação de problemas durante o desenvolvimento. Todas as bibliotecas utilizadas no frontend são gerenciadas pelo arquivo package.json, por meio do npm, que organiza as dependências necessárias para o funcionamento e a manutenção da aplicação.
 
-\subsection{Telas implementadas}
-
 A seguir, são apresentadas as telas do sistema, juntamente com a descrição de cada uma. A Figura~\ref{fig:login} mostra a primeira tela, a de login, na qual os usuários já cadastrados podem inserir suas credenciais e acessar o sistema, enquanto os interessados podem solicitar acesso por meio do botão de criação de conta.
 
 
@@ -625,8 +590,6 @@ Por fim, há também o cadastro de usuários, representado na Figura~\ref{fig:us
     \caption{Destinos}
     \label{fig:destinos-globais}
 \end{figure}
-
-\subsection{Desafios de implementação do frontend}
 
 Assim como na seção dedicada aos desafios de implementação do backend, esta seção apresenta os principais desafios encontrados durante o desenvolvimento do frontend.
 

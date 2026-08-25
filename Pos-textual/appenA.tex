@@ -1,49 +1,139 @@
-\chapter{Informações de Dados Nucleares}
-\label{apendice}
+\chapter{Diagramas UML de casos de uso}
+\label{apendice-casos-uso}
 
-A elaboração manual de tabelas pode ser trabalhosa. O site https://www.tablesgenerator.com/ pode ser utilizado para gerar tabelas com mais facilidade e fornecer exemplos de formatação.
+Este apêndice apresenta os diagramas UML correspondentes aos principais casos de uso do sistema Biribá. As funcionalidades foram agrupadas por área para evidenciar as associações dos atores agricultor, coordenador e administrador com o sistema, sem omitir nenhum dos casos de uso identificados no levantamento de requisitos.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%  COLOCAR TABELAS DE SEÇÕES DE CHOQUE  %%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzset{
+    uml system/.style={draw, rounded corners=2pt, fill=gray!4},
+    uml use case/.style={
+        draw,
+        ellipse,
+        fill=white,
+        align=center,
+        font=\small,
+        minimum width=4.4cm,
+        minimum height=0.95cm
+    },
+    uml association/.style={draw, semithick},
+    pics/uml actor/.style args={#1}{
+        code={
+            \draw (0,0.65) circle (0.17);
+            \draw (0,0.48) -- (0,-0.12);
+            \draw (-0.32,0.27) -- (0.32,0.27);
+            \draw (0,-0.12) -- (-0.27,-0.58);
+            \draw (0,-0.12) -- (0.27,-0.58);
+            \node[font=\small, align=center, anchor=north] at (0,-0.72) {#1};
+            \coordinate (-center) at (0,0.15);
+        }
+    }
+}
 
-\begin{table}[H]
-\centering
-\caption{Parâmetros de geração dos produtos de fissão (\cite{belo2022}).} \label{tab:generationPF} \vspace{0.5cm}
-\begin{tabular}{llcccc}
-\hline
-\textbf{$i$} & \textbf{Actinídeos} & \multicolumn{1}{l}{\textbf{$\gamma_{ij}$}} & \multicolumn{1}{l}{\textbf{}} & \multicolumn{1}{l}{\textbf{}} & \multicolumn{1}{l}{\textbf{}} \\ \hline
-\textbf{}    & \textbf{}           & \textbf{$j = 16$}                          & \textbf{$j = 18$}             & \textbf{$j = 19$}             & \textbf{$j = 20$}             \\
-\textbf{}    & \textbf{}           & \textbf{$^{149}$Pm}                      & \textbf{$^{135}$I}          & \textbf{$^{135}$Xe}         & \textbf{LFP}                \\ \hline
-1            & $^{234}$U           & 0,0107                                     & 0,0630                        & 0,0024                        & 1,0                           \\
-2            & $^{235}$U           & 0,0107                                     & 0,0630                        & 0,0024                        & 1,0                           \\
-3            & $^{236}$U           & 0,0107                                     & 0,0630                        & 0,0024                        & 1,0                           \\
-4            & $^{237}$Np          & 0,0107                                     & 0,0630                        & 0,0024                        & 1,0                           \\
-5            & $^{238}$U           & 0,0161                                     & 0,0683                        & 0,0003                        & 1,0                           \\
-6            & $^{238}$Pu          & 0,0124                                     & 0,0645                        & 0,0115                        & 1,0                           \\
-7            & $^{239}$Np          & 0,0000                                     & 0,0000                        & 0,0000                        & 0,0                           \\
-8            & $^{239}$Pu          & 0,0124                                     & 0,0645                        & 0,0115                        & 1,0                           \\
-9            & $^{240}$Pu          & 0,0124                                     & 0,0645                        & 0,0115                        & 1,0                           \\
-10           & $^{241}$Pu          & 0,0152                                     & 0,0707                        & 0,0023                        & 1,0                           \\
-11           & $^{241}$Am          & 0,0152                                     & 0,0707                        & 0,0023                        & 1,0                           \\
-12           & $^{242}$Pu          & 0,0152                                     & 0,0707                        & 0,0023                        & 1,0                           \\
-13           & $^{242}$Cm          & 0,0152                                     & 0,0707                        & 0,0023                        & 1,0                           \\
-14           & $^{243}$Am          & 0,0152                                     & 0,0707                        & 0,0023                        & 1,0                           \\
-15           & $^{244}$Cm          & 0,0152                                     & 0,0707                        & 0,0023                        & 1,0                           \\ \hline
-\end{tabular}
-\end{table}
+\section{Acesso ao sistema}
 
+A Figura~\ref{fig:uc-acesso} representa a solicitação de cadastro pelo agricultor e a aprovação ou rejeição desse acesso pelo coordenador ou administrador.
 
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \node[uml system, minimum width=8.4cm, minimum height=4.2cm] (sistema) at (7.5,0) {};
+        \node[anchor=north west, font=\small\bfseries] at ([xshift=0.2cm,yshift=-0.15cm]sistema.north west) {Sistema Biribá};
 
-\begin{table}[H]
-\centering
-\caption{Seções de choque microscópicas para o decaimento do tipo $n2n$ do $^{238}$U (\cite{belo2022}).} \label{tab:n2nU238} \vspace{0.5cm}
-\begin{tabular}{lc}
-\hline 
-\textbf{\begin{tabular}[l]{@{}l@{}}Região\\ {}\end{tabular}} & \begin{tabular}[c]{@{}c@{}}$\sigma_{n2n,g}^{U238}$\\ {[barn]}\end{tabular}   \\ \hline 
-FA01                                                                    & 6,17E-03                                                                   \\  
-FA02                                                                    & 6,17E-03                                                                  \\ 
-FA03                                                                    & 6,17E-03                                                                   \\ 
-FA04                                                                    & 6,17E-03                                                                   \\ \hline 
-\end{tabular}
-\end{table}
+        \node[uml use case] (solicitar) at (7.5,1) {Solicitar cadastro};
+        \node[uml use case] (aprovar) at (7.5,-1) {Aprovar usuário};
+
+        \pic (agricultor) at (1.4,1) {uml actor={Agricultor}};
+        \pic (coordenador) at (1.4,-1) {uml actor={Coordenador}};
+        \pic (administrador) at (13.6,-1) {uml actor={Administrador}};
+
+        \draw[uml association] (agricultor-center) -- (solicitar.west);
+        \draw[uml association] (coordenador-center) -- (aprovar.west);
+        \draw[uml association] (administrador-center) -- (aprovar.east);
+    \end{tikzpicture}
+    \caption{Diagrama UML dos casos de uso de acesso ao sistema}
+    \label{fig:uc-acesso}
+\end{figure}
+
+\section{Configuração do edital}
+
+A Figura~\ref{fig:uc-configuracao} apresenta os casos de uso associados à preparação da chamada pública. O coordenador e o administrador podem gerenciar famílias, criar editais e criar ciclos de entrega, enquanto o gerenciamento global de produtos e destinos é atribuído ao administrador.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \node[uml system, minimum width=8.6cm, minimum height=7.2cm] (sistema) at (7.5,0) {};
+        \node[anchor=north west, font=\small\bfseries] at ([xshift=0.2cm,yshift=-0.15cm]sistema.north west) {Sistema Biribá};
+
+        \node[uml use case] (familias) at (7.5,2.35) {Gerenciar famílias};
+        \node[uml use case] (edital) at (7.5,1.18) {Criar edital};
+        \node[uml use case] (produtos) at (7.5,0) {Gerenciar produtos};
+        \node[uml use case] (destinos) at (7.5,-1.18) {Gerenciar destinos};
+        \node[uml use case] (ciclos) at (7.5,-2.35) {Criar ciclos de entrega};
+
+        \pic (coordenador) at (1.3,0.7) {uml actor={Coordenador}};
+        \pic (administrador) at (13.7,-0.1) {uml actor={Administrador}};
+
+        \draw[uml association] (coordenador-center) -- (familias.west);
+        \draw[uml association] (coordenador-center) -- (edital.west);
+        \draw[uml association] (coordenador-center) -- (ciclos.west);
+
+        \draw[uml association] (administrador-center) -- (familias.east);
+        \draw[uml association] (administrador-center) -- (edital.east);
+        \draw[uml association] (administrador-center) -- (produtos.east);
+        \draw[uml association] (administrador-center) -- (destinos.east);
+        \draw[uml association] (administrador-center) -- (ciclos.east);
+    \end{tikzpicture}
+    \caption{Diagrama UML dos casos de uso de configuração do edital}
+    \label{fig:uc-configuracao}
+\end{figure}
+
+\section{Execução e acompanhamento}
+
+A Figura~\ref{fig:uc-execucao} representa as funcionalidades utilizadas durante a execução do edital. O coordenador e o administrador registram entregas, acompanham os indicadores e geram relatórios, enquanto o agricultor consulta os dados referentes à sua participação.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \node[uml system, minimum width=8.6cm, minimum height=6.3cm] (sistema) at (7.5,0) {};
+        \node[anchor=north west, font=\small\bfseries] at ([xshift=0.2cm,yshift=-0.15cm]sistema.north west) {Sistema Biribá};
+
+        \node[uml use case] (entrega) at (7.5,1.8) {Registrar entrega};
+        \node[uml use case] (dashboard) at (7.5,0.6) {Acompanhar dashboard};
+        \node[uml use case] (relatorios) at (7.5,-0.6) {Gerar relatórios};
+        \node[uml use case] (consulta) at (7.5,-1.8) {Consultar informações\\da participação};
+
+        \pic (coordenador) at (1.3,0.6) {uml actor={Coordenador}};
+        \pic (administrador) at (13.7,0.6) {uml actor={Administrador}};
+        \pic (agricultor) at (1.3,-1.8) {uml actor={Agricultor}};
+
+        \draw[uml association] (coordenador-center) -- (entrega.west);
+        \draw[uml association] (coordenador-center) -- (dashboard.west);
+        \draw[uml association] (coordenador-center) -- (relatorios.west);
+
+        \draw[uml association] (administrador-center) -- (entrega.east);
+        \draw[uml association] (administrador-center) -- (dashboard.east);
+        \draw[uml association] (administrador-center) -- (relatorios.east);
+
+        \draw[uml association] (agricultor-center) -- (consulta.west);
+    \end{tikzpicture}
+    \caption{Diagrama UML dos casos de uso de execução e acompanhamento}
+    \label{fig:uc-execucao}
+\end{figure}
+
+\section{Administração da plataforma}
+
+A Figura~\ref{fig:uc-administracao} apresenta o caso de uso de manutenção da plataforma, reservado ao administrador e relacionado aos ajustes, às correções e à evolução do sistema.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \node[uml system, minimum width=8.4cm, minimum height=3cm] (sistema) at (7.5,0) {};
+        \node[anchor=north west, font=\small\bfseries] at ([xshift=0.2cm,yshift=-0.15cm]sistema.north west) {Sistema Biribá};
+
+        \node[uml use case] (manter) at (7.5,0) {Manter o sistema};
+        \pic (administrador) at (1.4,0) {uml actor={Administrador}};
+
+        \draw[uml association] (administrador-center) -- (manter.west);
+    \end{tikzpicture}
+    \caption{Diagrama UML do caso de uso de administração da plataforma}
+    \label{fig:uc-administracao}
+\end{figure}
