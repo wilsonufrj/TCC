@@ -85,7 +85,7 @@ Depois da limpeza, gere o documento novamente com o comando da seção **Gerar o
 ├── thesis.tex             # arquivo principal e ordem dos capítulos
 ├── thesis.bib             # referências bibliográficas
 ├── poli.cls               # classe LaTeX da Escola Politécnica/UFRJ
-├── coppe-unsrt.bst        # estilo bibliográfico usado pelo documento
+├── coppe-unsrt.bst        # estilo bibliográfico legado do modelo
 ├── Pre-textual/           # agradecimentos, resumo, abstract e dedicatória
 ├── Textual/               # capítulos do TCC
 ├── Pos-textual/           # apêndices
@@ -101,9 +101,11 @@ Os arquivos `thesis-expanded.tex` e `thesis.docx`, quando presentes, são versõ
 As referências ficam em `thesis.bib`. O documento usa:
 
 ```tex
-\bibliographystyle{coppe-unsrt}
+\bibliographystyle{IEEEtranM}
 \bibliography{thesis}
 ```
+
+As citações são numéricas e seguem a ordem da primeira ocorrência no texto, conforme o padrão IEEE.
 
 Ao alterar a bibliografia, basta salvar o arquivo se o modo automático estiver ativo ou executar novamente o comando de geração do PDF.
 
