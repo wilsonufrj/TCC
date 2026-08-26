@@ -89,7 +89,7 @@ A intenção de manter o frontend e o backend separados era de dar independênci
 
 \section{Implementação do Backend}
 
-Seguindo princípios de arquitetura limpa, a estrutura de pastas do backend foi dividida em application, domain, infrastructure e web. A application é responsável pelas interfaces dos services que serão implementados. O domain representa todas as entidades do sistema que foram explicadas em seções anteriores, assim como DTOs e as interfaces que são implementadas em tempo de execução para o armazenamento no banco de dados. A infrastructure é responsável por armazenar configurações necessárias, a implementação dos services que dão a alma para o sistema e funções utilitárias para o sistema. A pasta web é responsável por armazenar os controllers que são o ponto de entrada das requisições, sejam elas vindas do frontend ou de alguma ferramenta que realiza requisições HTTP. Na Figura~\ref{fig:directory-structure} tem-se a ilustração da organização de diretórios do projeto.
+No projeto, a estrutura de pastas do backend foi dividida em application, domain, infrastructure e web, conforme os princípios arquiteturais apresentados no Capítulo~\ref{chap3}. A application é responsável pelas interfaces dos services que serão implementados. O domain representa todas as entidades do sistema que foram explicadas em seções anteriores, assim como DTOs e as interfaces que são implementadas em tempo de execução para o armazenamento no banco de dados. A infrastructure é responsável por armazenar configurações necessárias, a implementação dos services que dão a alma para o sistema e funções utilitárias para o sistema. A pasta web é responsável por armazenar os controllers que são o ponto de entrada das requisições, sejam elas vindas do frontend ou de alguma ferramenta que realiza requisições HTTP. Na Figura~\ref{fig:directory-structure} tem-se a ilustração da organização de diretórios do projeto.
 
 \begin{figure}[H]
     \centering
@@ -98,11 +98,11 @@ Seguindo princípios de arquitetura limpa, a estrutura de pastas do backend foi 
     \label{fig:directory-structure}
 \end{figure}
 
-A tecnologia utilizada para implementar o backend foi o Java 17, juntamente com o framework Spring Boot 3. Essa escolha permitiu estruturar a aplicação de forma modular, facilitando a criação de APIs, a organização das regras de negócio e a integração com o banco de dados. Para a criação dos endpoints e dos controllers responsáveis por receber as requisições da interface, foi utilizado o Spring Web, que permitiu organizar as rotas HTTP utilizadas pelo frontend.
+A tecnologia utilizada para implementar o backend foi o Java 17, juntamente com o framework Spring Boot 3. Essa escolha permitiu estruturar a aplicação de forma modular, facilitando a criação de APIs, a organização das regras de negócio e a integração com o banco de dados. Para a criação dos endpoints e dos controllers responsáveis por receber as requisições da interface, foi utilizado o Spring Web, que permitiu organizar as rotas HTTP utilizadas pelo frontend \cite{springboot2026}.
 
 Para melhorar a experiência de desenvolvimento e simplificar a comunicação com o banco de dados, foi utilizado o Spring Data JPA em conjunto com o Hibernate, uma ferramenta de mapeamento objeto-relacional (ORM). Com o uso dessas tecnologias, as entidades do sistema podem ser representadas por classes Java, permitindo que operações de armazenamento e consulta sejam realizadas por meio de métodos e repositórios da aplicação. Dessa forma, reduz-se a necessidade de escrever comandos SQL diretamente.
 
-O banco de dados escolhido foi o PostgreSQL, por ser uma ferramenta open-source, robusta e amplamente utilizada em aplicações web. Além disso, o PostgreSQL oferece bom desempenho tanto para sistemas em estágio inicial, como MVPs, quanto para aplicações maiores, que exigem maior consistência, confiabilidade e capacidade de expansão. Durante o desenvolvimento, o pgAdmin foi utilizado como ferramenta de apoio para visualizar tabelas, acompanhar registros e verificar informações armazenadas no banco de dados.
+O banco de dados escolhido foi o PostgreSQL, um sistema gerenciador de banco de dados objeto-relacional de código aberto \cite{postgresql2026}. Durante o desenvolvimento, o pgAdmin foi utilizado como ferramenta de apoio para visualizar tabelas, acompanhar registros e verificar informações armazenadas no banco de dados.
 
 Para lidar com questões de segurança da aplicação, foi inserido no projeto o Spring Security, possibilitando o controle de acesso às rotas restritas e o bloqueio de endpoints para usuários não autenticados. Além disso, foi adotado o uso de JWT, permitindo que as requisições ao backend fossem realizadas de forma autenticada e associadas ao usuário logado. Com isso, tornou-se possível controlar o acesso às funcionalidades do sistema de acordo com o perfil de cada usuário.
 
@@ -422,7 +422,7 @@ Além do token de acesso, o método chama a função responsável pelo processam
 
 O frontend foi pensado para tornar o sistema intuitivo e facilitar o uso pelos diferentes perfis de usuários. No caso do coordenador e do administrador, a interface busca auxiliar na administração dos editais do PAA. Já para o agricultor, o objetivo é permitir o acompanhamento claro do andamento de sua participação no edital.
 
-No desenvolvimento das telas e dos componentes do sistema, foi utilizada a biblioteca React 19. Para personalizar a interface e aproximar o projeto dos padrões visuais presentes em aplicações web atuais, foi escolhida a biblioteca MUI. Além de ser open-source, essa biblioteca implementa os princípios do Material Design, proposto pelo Google, contribuindo para a construção de uma interface padronizada, responsiva e de fácil utilização. A estilização dos componentes também utiliza o Emotion, tecnologia associada ao ecossistema do MUI e utilizada para organizar estilos aplicados à interface.
+No desenvolvimento das telas e dos componentes do sistema, foi utilizada a biblioteca React 19, baseada na composição de interfaces por componentes \cite{react2026}. Para personalizar a interface e aproximar o projeto dos padrões visuais presentes em aplicações web atuais, foi escolhida a biblioteca MUI. Além de ser open-source, essa biblioteca implementa os princípios do Material Design, proposto pelo Google, contribuindo para a construção de uma interface padronizada, responsiva e de fácil utilização. A estilização dos componentes também utiliza o Emotion, tecnologia associada ao ecossistema do MUI e utilizada para organizar estilos aplicados à interface.
 
 O TypeScript está presente em todo o desenvolvimento do frontend, pois contribui para manter maior coerência entre os dados manipulados pela aplicação. Como o sistema realiza troca constante de informações com o backend, os dados recebidos e enviados são tipados, o que reduz erros durante o desenvolvimento e facilita a manutenção do código.
 
@@ -662,7 +662,7 @@ Para realizar esse cálculo, a implementação percorre os ciclos anteriores e o
 \begin{lstlisting}[
     language=TypeScript,
     caption={Função que calcula quanto falta para um agricultor entregar},
-    label={lst:funcao_adicionar_familias_edital}
+    label={lst:calculo_entrega_faltante}
 ]
 
 const calculaEntregaFaltante = (
@@ -719,7 +719,7 @@ Entre os recursos implementados no frontend, destaca-se o dashboard analítico r
 \begin{lstlisting}[
     language=TypeScript,
     caption={Constante que define a timeline dos gráficos do dashboard},
-    label={lst:funcao_adicionar_familias_edital}
+    label={lst:timeline_dashboard}
 ]
 
 const timeline = useMemo<TimelineData>(() => {
@@ -824,9 +824,9 @@ Em todas as situações de erro, é utilizado o rejectWithValue. Esse recurso pe
 
 \section{Integração e Deploy}
 
-Durante o desenvolvimento do sistema, foi utilizado o Git como ferramenta de controle de versão, permitindo o acompanhamento das alterações realizadas no código-fonte e facilitando o trabalho colaborativo entre os desenvolvedores. Para o armazenamento remoto dos repositórios, foi utilizado o GitLab, que também oferece recursos de integração contínua e entrega contínua.
+Durante o desenvolvimento do sistema, foi utilizado o Git como ferramenta de controle de versão, permitindo o acompanhamento das alterações realizadas no código-fonte e facilitando o trabalho colaborativo entre os desenvolvedores \cite{chacon2014}. Para o armazenamento remoto dos repositórios, foi utilizado o GitLab, que também oferece recursos de integração contínua e entrega contínua \cite{gitlab2026}.
 
-Com o objetivo de apoiar a integração contínua de novas funcionalidades e padronizar o processo de construção da aplicação, foi configurado, em cada projeto, um arquivo chamado \texttt{.gitlab-ci.yml}. Esse arquivo é responsável por definir as etapas executadas automaticamente pelo GitLab CI/CD, como a verificação do código, acionamento de testes automatizados, a execução do build e a geração de uma nova imagem Docker. No backend, esse processo utiliza o Maven para executar as etapas de teste e construção da aplicação. No frontend, o processo utiliza o Vite para gerar a versão de produção da interface. Neste primeiro momento a aplicação possui somente testes automatizados para pontos essenciais e comportamentos críticos do sistema. Após a criação da imagem, ela é publicada no Docker Hub, possibilitando que a versão mais recente da aplicação esteja disponível para implantação no ambiente de homologação \cite{dockerhub2026}.
+Com o objetivo de apoiar a integração contínua de novas funcionalidades e padronizar o processo de construção da aplicação, foi configurado, em cada projeto, um arquivo chamado \texttt{.gitlab-ci.yml}. Esse arquivo é responsável por definir as etapas executadas automaticamente pelo GitLab CI/CD, como a verificação do código, o acionamento de testes automatizados, a execução do build e a geração de uma nova imagem Docker \cite{gitlabcicd2026,docker2026}. No backend, esse processo utiliza o Maven para executar as etapas de teste e construção da aplicação. No frontend, o processo utiliza o Vite para gerar a versão de produção da interface. Neste primeiro momento, a aplicação possui somente testes automatizados para pontos essenciais e comportamentos críticos do sistema. Após a criação da imagem, ela é publicada no Docker Hub, possibilitando que a versão mais recente da aplicação esteja disponível para implantação no ambiente de homologação \cite{dockerhub2026}.
 
 O ambiente de homologação da aplicação encontra-se em uma VPS hospedada na Hostinger. Nesse ambiente, o deploy ainda é realizado de forma manual. Para isso, existe um script no servidor responsável por remover as imagens locais dos containers, baixar as versões mais recentes publicadas no Docker Hub e executar novamente o Docker Compose, fazendo com que os serviços da aplicação sejam atualizados e disponibilizados online.
 

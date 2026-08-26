@@ -2,9 +2,9 @@
 
 \section{Tema}
 
-O Programa de Aquisição de Alimentos (PAA) é uma iniciativa do governo que tem como objetivo incentivar a agricultura familiar por meio de chamadas públicas e promover o acesso a uma alimentação saudável às famílias, sobretudo às que se encontram em situação de vulnerabilidade.
+O Programa de Aquisição de Alimentos (PAA) é uma iniciativa do governo que tem como objetivo incentivar a agricultura familiar por meio de chamadas públicas e promover o acesso a uma alimentação saudável às famílias, sobretudo às que se encontram em situação de vulnerabilidade \cite{cirino2016sistema,cirino2017prazo}.
 
-O gerenciamento de uma chamada pública do PAA requer organização e planejamento, visto que, ao longo do edital, são feitas entregas semanais de alimentos que devem ser registradas corretamente. Dito isso, este trabalho tem como objetivo descrever o sistema desenvolvido para gerenciar as entregas realizadas pelos agricultores a cada organização e equipamento de segurança alimentar que atendem à população em situação de insegurança alimentar e vulnerabilidade social.
+O gerenciamento de uma chamada pública do PAA requer organização e planejamento, visto que, ao longo do edital, são feitas entregas semanais de alimentos que devem ser registradas corretamente \cite{cirino2016sistema,resende2013presconpaa}. Dito isso, este trabalho tem como objetivo descrever o sistema desenvolvido para gerenciar as entregas realizadas pelos agricultores a cada organização e equipamento de segurança alimentar que atendem à população em situação de insegurança alimentar e vulnerabilidade social.
 
 % \begin{figure}[H]
 %     \centering
@@ -15,7 +15,7 @@ O gerenciamento de uma chamada pública do PAA requer organização e planejamen
 
 \section{Delimitação}
 
-O PAA possui seis modalidades no total. O projeto atuará na modalidade Doação Simultânea, que hoje é aplicada no assentamento dos agricultores do Projeto de Desenvolvimento Sustentável (PDS) Osvaldo de Oliveira, localizado no município de Macaé, na região Norte Fluminense.
+Este trabalho enfoca a modalidade Compra com Doação Simultânea do PAA \cite{mds2025adesaoPAA}, atualmente aplicada no assentamento dos agricultores do Projeto de Desenvolvimento Sustentável (PDS) Osvaldo de Oliveira, localizado no município de Macaé, na região Norte Fluminense.
 
 \section{Justificativa}
 
@@ -29,9 +29,9 @@ Nesse contexto, o sistema tem como objetivo fornecer ao gestor um panorama geral
 
 O levantamento dos requisitos funcionais e não funcionais do sistema foi realizado por meio de reuniões com os coordenadores do PAA e a partir dos feedbacks fornecidos por eles ao longo do processo. Após o mapeamento das funcionalidades necessárias, tornou-se essencial definir as tecnologias a serem utilizadas no desenvolvimento, bem como o tipo de arquitetura a ser adotada.
 
-Optou-se por uma arquitetura modular, garantindo a independência entre backend e frontend. No backend, foi escolhido o Java, uma linguagem consolidada no mercado, reconhecida por sua robustez, estabilidade e ampla comunidade, o que contribui para a manutenção e evolução do sistema. Para o frontend, adotou-se a biblioteca React, com o objetivo de proporcionar melhor performance e uma navegação mais fluida aos usuários. Como sistema gerenciador de banco de dados, utilizou-se o PostgreSQL, por se tratar de uma solução open source, estável, robusta e amplamente empregada em aplicações empresariais.
+Optou-se por uma arquitetura modular, garantindo a independência entre backend e frontend. No backend, foi escolhido o Java; para o frontend, adotou-se a biblioteca React \cite{react2026}; e, como sistema gerenciador de banco de dados, utilizou-se o PostgreSQL, solução objeto-relacional de código aberto \cite{postgresql2026}.
 
-Todo o projeto foi versionado com o uso do Git e armazenado no GitLab. Cada módulo possui sua própria imagem Docker, armazenada no DockerHub. Para a integração contínua, geração das imagens e realização do deploy no ambiente de homologação, foi utilizado o GitLab CI/CD. Ressalta-se que todo o projeto é open source e pode ser clonado nos respectivos repositórios.
+Todo o projeto foi versionado com o uso do Git e armazenado no GitLab \cite{chacon2014,gitlab2026}. Cada módulo possui sua própria imagem Docker, armazenada no DockerHub \cite{docker2026,dockerhub2026}. Para a integração contínua, geração das imagens e realização do deploy no ambiente de homologação, foi utilizado o GitLab CI/CD \cite{gitlabcicd2026}. Ressalta-se que todo o projeto é open source e pode ser clonado nos respectivos repositórios.
 
 
 \section{Descrição}
