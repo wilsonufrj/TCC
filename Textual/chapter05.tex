@@ -154,7 +154,7 @@ Essa função é responsável por adicionar produtos a um plano original. O mét
 
 Após a recuperação do plano original, é obtida a lista de produtos já associados a ele. Em seguida, o código percorre os identificadores recebidos. Para cada item, é realizada uma consulta no repositório de produtos. Quando o produto é localizado, uma nova entidade ProdutoEdital é criada e preenchida com as informações necessárias. Essa entidade representa a relação entre um produto cadastrado globalmente na aplicação e sua utilização dentro de um edital específico.
 
-Outro desafio de implementação foi a criação de ciclos dentro do sistema. O cógido abaixo mostra a implementação da criação de um ciclo.
+Outro desafio de implementação foi a criação de ciclos dentro do sistema. O cógido a seguir mostra a implementação da criação de um ciclo.
 
 \begin{lstlisting}[language=Java, caption={Serviço para criação de ciclos dentro do sistema}, label={lst:servico_criar_ciclo}]
 @Override
@@ -383,7 +383,7 @@ Além da tabela de produtos, o método preenche os demais campos do documento po
 
 Após o preenchimento de todas as informações, o documento é armazenado temporariamente em memória por meio de um fluxo de bytes. Ao final, o método retorna um vetor de bytes, permitindo que o termo seja disponibilizado para download pela camada responsável pela requisição, sem a necessidade de salvar uma cópia permanente do documento no servidor.
 
-Por último um processo que é complexo em sua estrutura e possui um comportamento fundamental na segurança da aplicação. O processo de login, abaixo, segue o trecho de código do service que valida o login da requisição.
+Por último um processo que é complexo em sua estrutura e possui um comportamento fundamental na segurança da aplicação. O processo de login, a seguir, segue o trecho de código do service que valida o login da requisição.
 
 \begin{lstlisting}[language=Java, caption={Serviço de login}, label={lst:servico_login}]
 @Override
