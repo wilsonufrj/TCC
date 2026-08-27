@@ -164,24 +164,25 @@ O primeiro trecho de código é referente à implementação responsável pelo c
 public List<ProdutoEditalDTO> adicionarProdutoEdital(List<Long> idProdutos, Lon idPlanoOriginal) {
 
     PlanoOriginal planoOriginal = planoOriginalRepository.findById(idPlanoOriginal)
-            .orElseThrow(() -> new RuntimeException("Erro ao encontrar o plano original"));
+            .orElseThrow(() -> new PlanoOriginalException("Erro ao encontrar o plano original"));
 
     List<ProdutoEdital> produtosEdital = planoOriginal.getProdutos();
 
-idProdutos.forEach(id -> {
-    Optional<Produto> oProduto = this.produtoRepository.findById(id);
-    if (oProduto.isPresent()) {
-        Produto produto = oProduto.get();
-
+List<ProdutoEdital> novosProdutos = idProdutos.stream()
+    .map(id -> produtoRepository.findById(id))
+    .filter(Optional::isPresent)
+    .map(Optional::get)
+    .map(produto -> {
         ProdutoEdital produtoEdital = new ProdutoEdital();
         produtoEdital.setNome(produto.getNome());
         produtoEdital.setPreco(new BigDecimal("0.0"));
         produtoEdital.setQuantidade(0L);
         produtoEdital.setPlanoOriginal(planoOriginal);
-        produtosEdital.add(produtoEditalRepository.save(produtoEdital));
-    }
-});
+        return produtoEditalRepository.save(produtoEdital);
+    })
+    .collect(Collectors.toList());
 
+produtosEdital.addAll(novosProdutos);
 planoOriginal.setProdutos(produtosEdital);
 
 return planoOriginalRepository.save(planoOriginal).getProdutos()
@@ -204,7 +205,11 @@ Outro desafio de implementação foi a criação de ciclos dentro do sistema. O 
 @Override
 public CicloDTO createCiclo(CicloRequest cicloDTO, Long idEdital) {
 
-    Edital oEdital = editalService.getEdital(idEdital);
+    Optional<Edital> oEdital = editalService.getEdital(idEdital);
+    
+    if(oEdital.isEmpty()) {
+        throw new CicloException("Edital não encontrado");
+    }
 
     Ciclo ciclo = new Ciclo();
     ciclo.setEntregas(new ArrayList<>());
@@ -262,10 +267,8 @@ public CicloDTO createCiclo(CicloRequest cicloDTO, Long idEdital) {
             ciclo.addEntregas(entrega);
 
         });
-
-    StatusCiclo statusCiclo = isBetween(LocalDate.now(),cicloDTO.dataInicio(),cicloDTO.dataFim())
-            ?StatusCiclo.ABERTO
-            :StatusCiclo.AGUARDANDO;
+    
+    StatusCiclo statusCiclo = getStatusCiclo(cicloDTO);
 
     ciclo.setNome(cicloDTO.nome());
 
@@ -285,7 +288,7 @@ public CicloDTO createCiclo(CicloRequest cicloDTO, Long idEdital) {
     try {
         Ciclo cicloSaved = cicloRepository.save(ciclo);
         return CicloService.toDto(cicloSaved);
-    }catch (Exception e) {
+    }catch (CicloException e) {
         log.info("Erro ao salvar o ciclo: {}",e.getMessage());
     }
 
@@ -311,16 +314,24 @@ public byte[] gerarTermoRecebimento(
         Long destinoUuid
 ) throws IOException, Docx4JException, JAXBException {
 
-    Ciclo ciclo = cicloService.getCiclo(cicloId);
+    Optional<Ciclo> oCiclo = cicloService.getCiclo(cicloId);
 
-    Usuario usuario = usuarioService.getUsuario(userUuid);
+    if(oCiclo.isEmpty()) {
+        throw new CicloException("Ciclo não encontrado");
+    }
+
+    Optional<Usuario> oUsuario = usuarioService.getUsuario(userUuid);
+    if(oUsuario.isEmpty()) {
+        throw new UsuarioException("Usuário não encontrado");
+    }
+
     Coletivo coletivo = usuario.getColetivo();
 
     Destino destino = destinoService.getDestino(destinoUuid);
 
     WordprocessingMLPackage pkg =
             WordprocessingMLPackage.load(
-                    new ClassPathResource("template/TermoRecebimentoTemplate.docx").getInputStream()
+                    new ClassPathResource(PATH_TEMPLATE_DOCX).getInputStream()
             );
 
     List<Item> itens = new ArrayList<>();
@@ -330,19 +341,19 @@ public byte[] gerarTermoRecebimento(
         .filter(entrega -> entrega.getDestino().getId().equals(destino.getId()))
         .forEach(entrega -> {
             entrega.getItens().forEach(entregaItem -> {
-                Item item = new Item(
-                        entregaItem.getProdutoEdital().getNome(),
-                        "Kg",
-                        entregaItem.getQuantidadeEntregue(),
-                        entregaItem.getProdutoEdital().getPreco().doubleValue()
-                );
+                Item item = Item.builder()
+                            .nome(entregaItem.getProdutoEdital().getNome())
+                            .unidade(Item.UNIDADE_PADRAO)
+                            .quantidade(entregaItem.getQuantidadeEntregue())
+                            .valorUnitario(entregaItem.getProdutoEdital().getPreco().doubleValue())
+                            .build();
                 itens.add(item);
             });
         });
 
     List<Object> tables = pkg.getMainDocumentPart().getJAXBNodesViaXPath("//w:tbl", true);
     if (tables.isEmpty()) {
-        throw new RuntimeException("Nenhuma tabela encontrada no documento.");
+        throw new DocumentException("Nenhuma tabela encontrada no documento.");
     }
 
     Tbl table = unwrap(tables.get(0));
@@ -353,7 +364,7 @@ public byte[] gerarTermoRecebimento(
             .collect(Collectors.toList());
 
     if (rows.size() < 3) {
-        throw new RuntimeException("Tabela precisa ter pelo menos: header, linha modelo e total.");
+        throw new DocumentException("Tabela precisa ter pelo menos: header, linha modelo e total.");
     }
 
     Tr modelRow = rows.get(4);
