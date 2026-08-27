@@ -2,6 +2,7 @@
 \label{chap5}
 
 O desenvolvimento do projeto teve início no segundo semestre de 2024, no âmbito da disciplina Software Livre e Metodologias Participativas. Após o término da disciplina, o projeto passou a integrar as atividades do projeto de extensão Tecnologia da Informação, Democracia e Movimentos Sociais (TICDEMOS), vinculado ao SOLTEC/UFRJ. Desde o início, a proposta contou com o acompanhamento da antiga gestora do PAA no PDS Osvaldo de Oliveira, que contribuiu com sua experiência para a modelagem do sistema e para a definição dos principais casos de uso.
+A implementação e a documentação apresentadas neste trabalho foram conduzidas pelo autor. O processo não ocorreu de forma isolada: a compreensão do domínio e a definição das funcionalidades receberam contribuições da antiga gestora do PAA, das atividades desenvolvidas no TICDEMOS e da interlocução posterior com a equipe da CONAB-RJ.
 Ao longo do desenvolvimento, a proposta passou por mudanças em sua organização técnica e funcional. Inicialmente, o sistema estava voltado para um único assentamento e para a criação de uma base mínima que permitisse cadastrar usuários, famílias, produtos, ciclos, destinos e editais. Em 2025, a proposta foi apresentada à equipe da Companhia Nacional de Abastecimento do Rio de Janeiro (CONAB-RJ). A reunião evidenciou a necessidade de contemplar, além do cadastro das informações essenciais do edital, o cadastro de coletivos, um painel que apresentasse com clareza o andamento do projeto e a geração de relatórios que apoiassem a comprovação das entregas, a visualização dos valores a receber pelas famílias agricultoras e a consolidação dos dados de entrega pelo coordenador.
 
 \section{Trabalhos Relacionados}
@@ -22,9 +23,9 @@ A comparação entre as ferramentas mostra que o Biribá não busca substituir o
 
 \section{Requisitos do Sistema}
 
-O levantamento dos requisitos do sistema foi realizado a partir de duas frentes diferentes, a primeira através de diálogo com a gestora do PAA no assentamento para entender seu dia-a-dia e como funcionava o diálogo com os agricultores e a segunda da análise baseado em planilhas no excel que mostrava o funcionamento da gestão do programa no Assentamento PDS Osvaldo de Oliveira. Inicialmente, o foco era entender como as informações das chamadas públicas eram organizadas, quais atividades eram realizadas durante a execução dos editais e quais dificuldades estavam presentes no processo de acompanhamento. Observou-se que o gerenciamento do edital envolve diferentes informações, como quais famílias agricultoras estão participando, quais produtos foram selecionados, quantas entregas foram realizadas, quais destinos receberão os alimentos e quais são os valores a receber por agricultor, além das informações para o gerenciamento do edital, era necessário gerar documentos que comprovem as entregas.
+O levantamento dos requisitos do sistema foi realizado por duas frentes complementares. A primeira consistiu em reuniões com a professora que através de um projeto de extensão, assessoriava a gestão  do PAA no assentamento, com o objetivo de compreender sua rotina de trabalho e a comunicação mantida com os agricultores. A segunda envolveu a análise das planilhas do Microsoft Excel utilizadas na gestão do programa no Assentamento PDS Osvaldo de Oliveira. Inicialmente, buscou-se compreender como as informações das chamadas públicas eram organizadas, quais atividades eram realizadas durante a execução dos editais e quais dificuldades estavam presentes no acompanhamento. Observou-se que a gestão reúne dados sobre famílias participantes, produtos selecionados, entregas realizadas, destinos dos alimentos e valores a receber por agricultor. Também foi identificada a necessidade de gerar documentos comprobatórios das entregas.
 
-Os casos de uso do sistema foram definidos a partir das principais ações realizadas durante a gestão de uma chamada pública do PAA e para que ficasse coerente com o levantamento de requisitos. Como objetivo do sistema é organizar informações sobre editais, famílias, produtos, ciclos, destinos e entregas, foi necessário identificar quais pessoas interagem com a plataforma e quais atividades cada uma delas precisa realizar, que se resume em três atores principais, o administrador, o coordenador e o agricultor.
+Os casos de uso do sistema foram definidos a partir das principais ações realizadas durante a gestão de uma chamada pública do PAA, em consonância com o levantamento de requisitos. Como o objetivo do sistema é organizar informações sobre editais, famílias, produtos, ciclos, destinos e entregas, foram identificadas as pessoas que interagem com a plataforma e as atividades sob responsabilidade de cada uma. Essas interações se concentram em três atores principais: o administrador, o coordenador e o agricultor.
 
 O administrador é o usuário que tem máximo acesso ao sistema, podendo criar coletivos, produtos, editais, aprovar usuários e modificar informações livremente no sistema. O segundo ator, o coordenador, é responsável por acompanhar a execução do edital, aprovar usuários do mesmo coletivo, cadastrar famílias, organizar produtos, criar editais, criar ciclos de entrega, registrar informações e acompanhar o andamento da chamada pública. Por fim, o agricultor acompanha as informações referentes à sua participação, como produtos previstos, entregas realizadas e valores a receber.
 
@@ -77,19 +78,48 @@ A Figura~\ref{fig:modelo-dominio} apresenta uma proposta de modelo de domínio s
 
 \section{Arquitetura Geral do Sistema}
 
-A arquitetura geral do sistema foi pensada para organizar o desenvolvimento em partes bem definidas, separando a interface utilizada pelos usuários das regras de negócio e do armazenamento das informações. Como o sistema precisa lidar com módulos e cada um com sua respectiva função, a aplicação foi estruturada para permitir que cada parte evolua de forma mais organizada, sem que uma alteração em uma funcionalidade comprometa todo o sistema.
+A arquitetura geral do sistema organiza a aplicação em partes com responsabilidades definidas, separando a interface gráfica, as regras de negócio e o armazenamento das informações. Essa estrutura modular permite que cada parte evolua com maior independência e reduz o impacto de alterações localizadas.
 
 O sistema foi desenvolvido como uma aplicação web, pois esse formato facilita o acesso por diferentes dispositivos, como computadores, notebooks e celulares.
 
-Um ponto considerado na arquitetura foi a necessidade de manter o sistema preparado para novas funcionalidades, a arquitetura foi pensada de forma modular, permitindo que novos módulos sejam incorporados progressivamente, sem afetar o comportamento atual do sistema.
+A possibilidade de incorporar novas funcionalidades também orientou a definição da arquitetura, de modo que novos módulos possam ser adicionados progressivamente sem comprometer o comportamento existente.
 
 A estrutura geral é composta por duas partes principais: o frontend e o backend. O frontend é responsável pela interface com o usuário, apresentando as telas, formulários, tabelas e informações necessárias para a gestão do PAA. O backend é responsável por receber as requisições da interface, aplicar as regras de negócio e realizar a comunicação com o banco de dados. 
 
-A intenção de manter o frontend e o backend separados era de dar independência ao desenvolvimento de cada um. Mesmo que um complete o outro, funcionalidades como filtros podem ser aplicadas ao backend sem que seja necessário derrubar toda a aplicação.
+A separação entre frontend e backend confere independência ao desenvolvimento de cada módulo. Embora atuem de forma integrada, alterações internas, como a inclusão de filtros no backend, podem ser realizadas sem modificar toda a aplicação.
+
+\begin{figure}[H]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tikzpicture}[
+        component/.style={draw, rounded corners, align=center, minimum width=3.1cm, minimum height=1.15cm, fill=blue!5},
+        deploy/.style={draw, rounded corners, align=center, minimum width=3.1cm, minimum height=1.15cm, fill=green!8},
+        flow/.style={->, >=stealth, thick}
+    ]
+        \node[component] (browser) {Usuários\\Navegador web};
+        \node[component, right=1.2cm of browser] (frontend) {Frontend\\React 19 e TypeScript};
+        \node[component, right=1.2cm of frontend] (backend) {Backend\\Java 17 e Spring Boot 3};
+        \node[component, right=1.2cm of backend] (database) {Banco de dados\\PostgreSQL};
+
+        \draw[flow] (browser) -- node[above]{HTTPS} (frontend);
+        \draw[flow] (frontend) -- node[above]{API REST/JSON} (backend);
+        \draw[flow] (backend) -- node[above]{JPA/Hibernate} (database);
+
+        \node[deploy, below=1.4cm of frontend] (gitlab) {GitLab\\CI e CD};
+        \node[deploy, below=1.4cm of backend] (dockerhub) {Docker Hub\\Imagens dos módulos};
+        \node[deploy, below=1.4cm of database] (vps) {VPS de homologação\\Docker Compose};
+
+        \draw[flow] (gitlab) -- node[above]{build} (dockerhub);
+        \draw[flow] (dockerhub) -- node[above]{implantação} (vps);
+    \end{tikzpicture}%
+    }
+    \caption{Arquitetura lógica e fluxo de implantação do sistema Biribá}
+    \label{fig:arquitetura-biriba}
+\end{figure}
 
 \section{Implementação do Backend}
 
-No projeto, a estrutura de pastas do backend foi dividida em application, domain, infrastructure e web, conforme os princípios arquiteturais apresentados no Capítulo~\ref{chap3}. A application é responsável pelas interfaces dos services que serão implementados. O domain representa todas as entidades do sistema que foram explicadas em seções anteriores, assim como DTOs e as interfaces que são implementadas em tempo de execução para o armazenamento no banco de dados. A infrastructure é responsável por armazenar configurações necessárias, a implementação dos services que dão a alma para o sistema e funções utilitárias para o sistema. A pasta web é responsável por armazenar os controllers que são o ponto de entrada das requisições, sejam elas vindas do frontend ou de alguma ferramenta que realiza requisições HTTP. Na Figura~\ref{fig:directory-structure} tem-se a ilustração da organização de diretórios do projeto.
+No projeto, a estrutura de pastas do backend foi dividida em application, domain, infrastructure e web, conforme os princípios arquiteturais apresentados no Capítulo~\ref{chap3}. A camada application reúne as interfaces dos serviços. A domain representa as entidades, os DTOs e as abstrações utilizadas para persistência. A infrastructure contém as configurações, as implementações dos serviços que concentram a lógica central e as funções utilitárias. Por fim, a camada web armazena os controllers que recebem as requisições provenientes do frontend ou de outros clientes HTTP. A Figura~\ref{fig:directory-structure} ilustra essa organização de diretórios.
 
 \begin{figure}[H]
     \centering
@@ -108,7 +138,7 @@ Para lidar com questões de segurança da aplicação, foi inserido no projeto o
 
 Para os testes unitários, foram utilizadas as bibliotecas JUnit e Mockito. O JUnit permite estruturar e executar os testes automatizados, enquanto o Mockito possibilita simular comportamentos de componentes da aplicação, como serviços e repositórios. Essas ferramentas contribuem para validar processos críticos, como criação, atualização e consulta de dados, além de ajudar a garantir que mudanças futuras no código não comprometam comportamentos já implementados. O gerenciamento das dependências, a execução dos testes e a geração do pacote da aplicação foram organizados por meio do Maven, mantendo uma estrutura padronizada para o projeto backend.
 
-Na documentação da API, foi utilizado o OpenAPI/Swagger, por ser uma ferramenta open-source que gera uma interface interativa para visualização e teste dos endpoints da aplicação. Com isso, torna-se possível consultar os recursos disponíveis, verificar os parâmetros esperados e testar requisições diretamente pela própria aplicação, sem a necessidade inicial de ferramentas externas. 
+Na documentação da API, foi utilizado o OpenAPI/Swagger, ferramenta de código aberto que gera uma interface interativa para visualização e teste dos endpoints da aplicação. Com isso, torna-se possível consultar os recursos disponíveis, verificar os parâmetros esperados e testar requisições diretamente pela própria aplicação, sem a necessidade inicial de ferramentas externas.
 
 
 Com o objetivo de apresentar os principais desafios técnicos enfrentados durante o desenvolvimento do backend, esta seção analisa implementações que são complexas na  modelagem, integração e controle das entidades do sistema. 
@@ -160,7 +190,7 @@ Outro desafio de implementação foi a criação de ciclos dentro do sistema. O 
 @Override
 public CicloDTO createCiclo(CicloRequest cicloDTO, Long idEdital) {
 
-    Edital edital = editalService.getEdital(idEdital);
+    Edital oEdital = editalService.getEdital(idEdital);
 
     Ciclo ciclo = new Ciclo();
     ciclo.setEntregas(new ArrayList<>());
@@ -422,7 +452,7 @@ Além do token de acesso, o método chama a função responsável pelo processam
 
 O frontend foi pensado para tornar o sistema intuitivo e facilitar o uso pelos diferentes perfis de usuários. No caso do coordenador e do administrador, a interface busca auxiliar na administração dos editais do PAA. Já para o agricultor, o objetivo é permitir o acompanhamento claro do andamento de sua participação no edital.
 
-No desenvolvimento das telas e dos componentes do sistema, foi utilizada a biblioteca React 19, baseada na composição de interfaces por componentes \cite{react2026}. Para personalizar a interface e aproximar o projeto dos padrões visuais presentes em aplicações web atuais, foi escolhida a biblioteca MUI. Além de ser open-source, essa biblioteca implementa os princípios do Material Design, proposto pelo Google, contribuindo para a construção de uma interface padronizada, responsiva e de fácil utilização. A estilização dos componentes também utiliza o Emotion, tecnologia associada ao ecossistema do MUI e utilizada para organizar estilos aplicados à interface.
+No desenvolvimento das telas e dos componentes do sistema, foi utilizada a biblioteca React 19, baseada na composição de interfaces por componentes \cite{react2026}. Para personalizar a interface e aproximar o projeto dos padrões visuais presentes em aplicações web atuais, foi escolhida a biblioteca MUI. Além de ser de código aberto, essa biblioteca implementa os princípios do Material Design, proposto pelo Google, contribuindo para a construção de uma interface padronizada, responsiva e de fácil utilização. A estilização dos componentes também utiliza o Emotion, tecnologia associada ao ecossistema do MUI e utilizada para organizar estilos aplicados à interface.
 
 O TypeScript está presente em todo o desenvolvimento do frontend, pois contribui para manter maior coerência entre os dados manipulados pela aplicação. Como o sistema realiza troca constante de informações com o backend, os dados recebidos e enviados são tipados, o que reduz erros durante o desenvolvimento e facilita a manutenção do código.
 
@@ -593,7 +623,7 @@ Por fim, há também o cadastro de usuários, representado na Figura~\ref{fig:us
 
 Assim como na seção dedicada aos desafios de implementação do backend, esta seção apresenta os principais desafios encontrados durante o desenvolvimento do frontend.
 
-O primeiro desafio analisado corresponde à associação de famílias previamente cadastradas ao plano original de um edital em andamento.O plano original organiza os produtos em duas matrizes dinâmicas: uma por família e outra por destino. Nesse contexto, a interface precisa representar estruturas aninhadas recebidas da API, permitir sua edição e manter os dados sincronizados entre os componentes, o Redux e o backend. No trecho apresentado a seguir, destaca-se a implementação responsável por adicionar famílias ao plano original, verificando as associações existentes para evitar registros duplicados e atualizando o edital selecionado após a conclusão da requisição.
+O primeiro desafio analisado corresponde à associação de famílias previamente cadastradas ao plano original de um edital em andamento. O plano original organiza os produtos em duas matrizes dinâmicas: uma por família e outra por destino. Nesse contexto, a interface precisa representar estruturas aninhadas recebidas da API, permitir sua edição e manter os dados sincronizados entre os componentes, o Redux e o backend. No trecho apresentado a seguir, destaca-se a implementação responsável por adicionar famílias ao plano original, verificando as associações existentes para evitar registros duplicados e atualizando o edital selecionado após a conclusão da requisição.
 
 \begin{lstlisting}[
     language=TypeScript,

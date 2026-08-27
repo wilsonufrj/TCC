@@ -493,7 +493,7 @@ top=2.5cm,bottom=2.5cm,left=3.0cm,right=3.0cm]{geometry}
 				}
 				\newcommand\printlosymbols{%
 					\renewcommand\glossaryname{\listsymbolname}%
-					\@input@{\jobname.los}}
+					\@input@{\jobname.syx}}
 				\def\makelosymbols{%
 					\newwrite\@losfile
 					\immediate\openout\@losfile=\jobname.syx
@@ -518,7 +518,7 @@ top=2.5cm,bottom=2.5cm,left=3.0cm,right=3.0cm]{geometry}
 							\@esphack}}}
 				\newcommand\printloabbreviations{%
 					\renewcommand\glossaryname{\listabbreviationname}%
-					\@input@{\jobname.lab}}
+					\@input@{\jobname.abx}}
 				\def\makeloabbreviations{%
 					\newwrite\@labfile
 					\immediate\openout\@labfile=\jobname.abx
