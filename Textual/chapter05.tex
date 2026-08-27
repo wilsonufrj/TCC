@@ -90,30 +90,44 @@ A separação entre frontend e backend confere independência ao desenvolvimento
 
 \begin{figure}[H]
     \centering
-    \resizebox{\textwidth}{!}{%
+    \resizebox{0.98\textwidth}{!}{%
     \begin{tikzpicture}[
-        component/.style={draw, rounded corners, align=center, minimum width=3.1cm, minimum height=1.15cm, fill=blue!5},
-        deploy/.style={draw, rounded corners, align=center, minimum width=3.1cm, minimum height=1.15cm, fill=green!8},
-        flow/.style={->, >=stealth, thick}
+        component/.style={
+            draw=blue!65!black,
+            very thick,
+            rounded corners=3pt,
+            align=center,
+            minimum width=3.25cm,
+            minimum height=1.5cm,
+            fill=blue!5,
+            font=\sffamily
+        },
+        request/.style={->, >=stealth, thick, blue!70!black},
+        response/.style={<-, >=stealth, thick, green!45!black},
+        flowlabel/.style={font=\sffamily\scriptsize, align=center, fill=white, inner sep=1pt}
     ]
-        \node[component] (browser) {Usuários\\Navegador web};
-        \node[component, right=1.2cm of browser] (frontend) {Frontend\\React 19 e TypeScript};
-        \node[component, right=1.2cm of frontend] (backend) {Backend\\Java 17 e Spring Boot 3};
-        \node[component, right=1.2cm of backend] (database) {Banco de dados\\PostgreSQL};
+        \node[component] (user) {\textbf{Usuário}\\Navegador web};
+        \node[component, right=2.25cm of user] (frontend) {\textbf{Frontend}\\React 19 e TypeScript};
+        \node[component, right=2.25cm of frontend] (backend) {\textbf{Backend}\\Java 17 e Spring Boot 3};
+        \node[component, right=2.25cm of backend] (database) {\textbf{Banco de dados}\\PostgreSQL};
 
-        \draw[flow] (browser) -- node[above]{HTTPS} (frontend);
-        \draw[flow] (frontend) -- node[above]{API REST/JSON} (backend);
-        \draw[flow] (backend) -- node[above]{JPA/Hibernate} (database);
+        \draw[request] ([yshift=4mm]user.east) --
+            node[flowlabel, above]{Ações} ([yshift=4mm]frontend.west);
+        \draw[response] ([yshift=-4mm]user.east) --
+            node[flowlabel, below]{Interface} ([yshift=-4mm]frontend.west);
 
-        \node[deploy, below=1.4cm of frontend] (gitlab) {GitLab\\CI e CD};
-        \node[deploy, below=1.4cm of backend] (dockerhub) {Docker Hub\\Imagens dos módulos};
-        \node[deploy, below=1.4cm of database] (vps) {VPS de homologação\\Docker Compose};
+        \draw[request] ([yshift=4mm]frontend.east) --
+            node[flowlabel, above]{Requisições\\HTTP} ([yshift=4mm]backend.west);
+        \draw[response] ([yshift=-4mm]frontend.east) --
+            node[flowlabel, below]{Respostas\\HTTP} ([yshift=-4mm]backend.west);
 
-        \draw[flow] (gitlab) -- node[above]{build} (dockerhub);
-        \draw[flow] (dockerhub) -- node[above]{implantação} (vps);
+        \draw[request] ([yshift=4mm]backend.east) --
+            node[flowlabel, above]{Consultas e\\comandos} ([yshift=4mm]database.west);
+        \draw[response] ([yshift=-4mm]backend.east) --
+            node[flowlabel, below]{Dados e\\resultados} ([yshift=-4mm]database.west);
     \end{tikzpicture}%
     }
-    \caption{Arquitetura lógica e fluxo de implantação do sistema Biribá}
+    \caption{Comunicação entre os módulos da arquitetura do sistema Biribá}
     \label{fig:arquitetura-biriba}
 \end{figure}
 
