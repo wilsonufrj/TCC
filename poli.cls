@@ -54,6 +54,7 @@
 \ProvidesClass{poli}[\filedate\ \fileversion\ Poli Dissertations]
 \LoadClass[12pt,a4paper,oneside]{book}
 \RequirePackage{lastpage}
+\RequirePackage{float}
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage[english,brazil]{babel}
 \RequirePackage{hyphenat}
@@ -216,6 +217,9 @@ top=2.5cm,bottom=2.5cm,left=3.0cm,right=3.0cm]{geometry}
 	\global\@namedef{K:\expandafter\the\c@keywords}{#1}
 	\global\addtocounter{keywords}{1}
 }
+\let\@postapproval\@empty
+\newcommand\postapproval[1]{%
+	\gdef\@postapproval{#1}}
 \renewcommand\frontmatter{%
 	\cleardoublepage
 	\@mainmatterfalse
@@ -224,8 +228,9 @@ top=2.5cm,bottom=2.5cm,left=3.0cm,right=3.0cm]{geometry}
 	\setcounter{page}{2}
 	\makefrontpage
 	\clearpage
-	\pagestyle{plain}
-	\ifthenelse{\boolean{maledoc}}{}{\makecatalog}%
+	\@postapproval
+	\clearpage
+	\pagestyle{plain}%
 }
 \renewcommand\mainmatter{%
 	\immediate\write\@auxout{%
@@ -241,19 +246,15 @@ top=2.5cm,bottom=2.5cm,left=3.0cm,right=3.0cm]{geometry}
 	\clearpage
 	\fi}
 \newcommand\approval@signature[2]{%
-	\noindent
-	\begin{minipage}[t]{0.20\textwidth}
-		\raggedright #1:
-	\end{minipage}%
-	\hfill
-	\begin{minipage}[t]{0.74\textwidth}
-		\centering
-		\vspace*{6mm}
-		\rule{\linewidth}{0.4pt}\par
-		\vspace*{-1mm}
-		#2
-	\end{minipage}\par
-	\vspace*{14mm}}
+	\noindent #1:\par
+	\vspace{0.5cm}
+	\begin{flushright}
+		\parbox{10cm}{%
+			\hrulefill\par
+			\vspace*{-.375cm}
+			\centering #2\par
+			\vspace{0.1cm}}
+	\end{flushright}}
 \renewcommand\maketitle{%
 	\pagenumbering{alph}
 	\config@hypersetup
@@ -306,9 +307,10 @@ top=2.5cm,bottom=2.5cm,left=3.0cm,right=3.0cm]{geometry}
 		{\@authname\ \@authsurn}\par
 	\end{center}\par
 	\vspace*{4mm}
-	\frontpage@maintext
-		\vspace*{4mm}
-		\approval@signature{Autor}{\@authname\ \@authsurn}
+		\frontpage@maintext
+			\vspace*{4mm}
+			\vspace*{1cm}
+			\approval@signature{Autor}{\@authname\ \@authsurn}
 		\approval@signature{Orientador}{%
 			\@adtitle\ \@adname\ \@adsurn, \@addegree}
 		\ifthenelse{\equal{\@coadname}{\@empty}}{}{%

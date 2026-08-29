@@ -114,7 +114,7 @@ A separação entre frontend e backend confere independência ao desenvolvimento
         \draw[request] ([yshift=4mm]user.east) --
             node[flowlabel, above]{Ações} ([yshift=4mm]frontend.west);
         \draw[response] ([yshift=-4mm]user.east) --
-            node[flowlabel, below]{Interface} ([yshift=-4mm]frontend.west);
+            node[flowlabel, below]{Respostas} ([yshift=-4mm]frontend.west);
 
         \draw[request] ([yshift=4mm]frontend.east) --
             node[flowlabel, above]{Requisições\\HTTP} ([yshift=4mm]backend.west);
@@ -161,7 +161,7 @@ O primeiro trecho de código é referente à implementação responsável pelo c
 
 \begin{lstlisting}[language=Java, caption={Serviço de adicionar produtos ao edital}, label={lst:servico_adicionar_produto_edital}]
 @Override
-public List<ProdutoEditalDTO> adicionarProdutoEdital(List<Long> idProdutos, Lon idPlanoOriginal) {
+public List<ProdutoEditalDTO> adicionarProdutoEdital(List<Long> idProdutos, Long idPlanoOriginal) {
 
     PlanoOriginal planoOriginal = planoOriginalRepository.findById(idPlanoOriginal)
             .orElseThrow(() -> new PlanoOriginalException("Erro ao encontrar o plano original"));
@@ -208,8 +208,10 @@ public CicloDTO createCiclo(CicloRequest cicloDTO, Long idEdital) {
     Optional<Edital> oEdital = editalService.getEdital(idEdital);
     
     if(oEdital.isEmpty()) {
-        throw new CicloException("Edital não encontrado");
+        throw new EditalException("Edital nao encontrado");
     }
+
+    Edital edital = oEdital.get();
 
     Ciclo ciclo = new Ciclo();
     ciclo.setEntregas(new ArrayList<>());
@@ -317,13 +319,17 @@ public byte[] gerarTermoRecebimento(
     Optional<Ciclo> oCiclo = cicloService.getCiclo(cicloId);
 
     if(oCiclo.isEmpty()) {
-        throw new CicloException("Ciclo não encontrado");
+        throw new CicloException("Ciclo nao encontrado");
     }
+
+    Ciclo ciclo = oCiclo.get();
 
     Optional<Usuario> oUsuario = usuarioService.getUsuario(userUuid);
     if(oUsuario.isEmpty()) {
-        throw new UsuarioException("Usuário não encontrado");
+        throw new UsuarioException("Usuario nao encontrado");
     }
+
+    Usuario usuario = oUsuario.get();
 
     Coletivo coletivo = usuario.getColetivo();
 
@@ -438,7 +444,7 @@ Além da tabela de produtos, o método preenche os demais campos do documento po
 
 Após o preenchimento de todas as informações, o documento é armazenado temporariamente em memória por meio de um fluxo de bytes. Ao final, o método retorna um vetor de bytes, permitindo que o termo seja disponibilizado para download pela camada responsável pela requisição, sem a necessidade de salvar uma cópia permanente do documento no servidor.
 
-Por último um processo que é complexo em sua estrutura e possui um comportamento fundamental na segurança da aplicação. O processo de login, a seguir, segue o trecho de código do service que valida o login da requisição.
+Por último um processo que é complexo em sua estrutura e possui um comportamento fundamental na segurança da aplicação. O processo de login, a seguir, mostra o trecho de código do service que valida o login da requisição.
 
 \begin{lstlisting}[language=Java, caption={Serviço de login}, label={lst:servico_login}]
 @Override
